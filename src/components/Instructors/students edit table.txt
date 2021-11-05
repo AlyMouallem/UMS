@@ -1,0 +1,49 @@
+{
+  Object.keys(grade).map((key, index) => {
+    return (
+      <>
+        <tr>
+          <th>{index + 1}</th>
+          <th>{key.toUpperCase()}</th>
+          <td>{Object.values(grade)[index].percentage}</td>
+          <td>
+            {!edit ? (
+              <> {Object.values(grade)[index].mark}</>
+            ) : (
+              <>
+                <input
+                  onChange={(e) =>
+                    setGrade({
+                      ...grade,
+                      attendance: {
+                        ...attendance,
+                        mark: e.target.value,
+                      },
+                    })
+                  }
+                  value={Object.values(grade)[index].mark}
+                  type="number"
+                  min={0}
+                  max={100}
+                  className="form-control form-control-sm"
+                ></input>
+              </>
+            )}
+          </td>
+          <td>
+            {(Object.values(grade)[index].mark *
+              Object.values(grade)[index].percentage) /
+              100}
+          </td>
+        </tr>
+      </>
+    );
+  });
+}
+<tr>
+  <th>5</th>
+  <th>Total</th>
+  <td>100</td>
+  <td></td>
+  <td>{total}</td>
+</tr>;

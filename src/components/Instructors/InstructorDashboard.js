@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import GaugeChart from "react-gauge-chart/dist";
 
 const InstructorDashboard = ({ maxPC }) => {
   const length = maxPC.length;
-  useEffect(async () => {}, []);
 
   const code = [];
   const student = [];

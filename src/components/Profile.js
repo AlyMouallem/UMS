@@ -8,24 +8,21 @@ const Profile = () => {
     JSON.parse(window.localStorage.getItem("auth"))
   );
   const { user, token } = state;
-  const { name, email, _id, role } = user;
+  const { name, email, _id } = user;
   const [nameE, setNameE] = useState(name);
   const [emailE, setEmailE] = useState(email);
 
   const [editName, setEditName] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
 
-  const instructor = role === "Instructor";
-
   useEffect(() => {
-    console.log(instructor);
+    const setAuth = () => {
+      axios.defaults.headers.common = {
+        Authorization: "Bearer " + token,
+      };
+    };
     setAuth();
   }, []);
-  const setAuth = () => {
-    axios.defaults.headers.common = {
-      Authorization: "Bearer " + token,
-    };
-  };
 
   const handleChange = async () => {
     try {
@@ -41,7 +38,6 @@ const Profile = () => {
 
       toast.success(data.message);
       window.localStorage.setItem("auth", JSON.stringify({ token, user }));
-      window.location = window.location;
     } catch (error) {
       toast.error(error.message);
     }
@@ -54,9 +50,10 @@ const Profile = () => {
       );
       console.log(result);
 
-      let keysToRemove = ["auth", "courses", "registered"];
+      const keysToRemove = ["auth", "courses", "registered"];
       keysToRemove.map((key) => {
         window.localStorage.removeItem(key);
+        return true;
       });
       toast.success("account deleted");
       window.location = "/";
@@ -125,15 +122,15 @@ const Profile = () => {
               >
                 Submit
               </button>
+              <hr />
+              <button
+                onClick={handleDelete}
+                className="btn btn-danger mx-auto d-block"
+              >
+                Delete your account?
+              </button>
             </div>
           </div>
-          <hr />
-          <button
-            onClick={handleDelete}
-            className="btn btn-danger mx-auto d-block"
-          >
-            Delete your account?
-          </button>
         </div>
       )}
     </>

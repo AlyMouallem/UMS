@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BsArrow90DegLeft } from "react-icons/bs";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 const ListStudents = () => {
   const [courses, setCourses] = useState([]);
 
@@ -34,31 +35,31 @@ const ListStudents = () => {
               <div className="col-1"></div>
               <div className="col-10 py-2">
                 <h1>Below are all the Courses</h1>
-                <table className="table ">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Code</th>
-                      <th>Major</th>
-                      <th>Instructor</th>
-                      <th>Time</th>
-                      <th>View students</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="table ">
+                  <Thead>
+                    <Tr>
+                      <Th>#</Th>
+                      <Th>Name</Th>
+                      <Th>Code</Th>
+                      <Th>Major</Th>
+                      <Th>Instructor</Th>
+                      <Th>Time</Th>
+                      <Th>View students</Th>
+                      <Th>Delete</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {courses.map(
                       ({ name, code, major, instructor, time }, index) => {
                         return (
-                          <tr key={index}>
-                            <th>{index + 1}</th>
-                            <td>{name}</td>
-                            <td>{code}</td>
-                            <td>{major}</td>
-                            <td>{instructor}</td>
-                            <td>{time}</td>
-                            <td>
+                          <Tr key={index}>
+                            <Th>{index + 1}</Th>
+                            <Td>{name}</Td>
+                            <Td>{code}</Td>
+                            <Td>{major}</Td>
+                            <Td>{instructor}</Td>
+                            <Td>{time}</Td>
+                            <Td>
                               {" "}
                               {
                                 <BsArrow90DegLeft
@@ -69,21 +70,21 @@ const ListStudents = () => {
                                   }}
                                 />
                               }
-                            </td>
-                            <td>
+                            </Td>
+                            <Td>
                               <button
                                 className="btn btn-danger"
                                 onClick={() => handleDelete(code)}
                               >
                                 Delete
                               </button>
-                            </td>
-                          </tr>
+                            </Td>
+                          </Tr>
                         );
                       }
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
             </div>
           </div>

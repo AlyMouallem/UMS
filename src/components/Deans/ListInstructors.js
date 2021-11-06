@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { AppstoreFilled } from "@ant-design/icons";
 import { Modal } from "antd";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const ListInstructors = () => {
   const [instructors, setInstructors] = useState([]);
@@ -34,25 +35,25 @@ const ListInstructors = () => {
               <div className="col-3"></div>
               <div>
                 <h1>Below are all the instructors</h1>
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Courses</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="table">
+                  <Thead>
+                    <Tr>
+                      <Th>#</Th>
+                      <Th>Name</Th>
+                      <Th>Email</Th>
+                      <Th>Courses</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {instructors.map(
                       ({ first_name, last_name, email }, index) => {
                         return (
-                          <tr key={index}>
-                            <th>{index + 1}</th>
-                            <td>{`${first_name} ${last_name}`}</td>
-                            <td>{email}</td>
+                          <Tr key={index}>
+                            <Th>{index + 1}</Th>
+                            <Td>{`${first_name} ${last_name}`}</Td>
+                            <Td>{email}</Td>
 
-                            <td>
+                            <Td>
                               {
                                 <AppstoreFilled
                                   onClick={() =>
@@ -64,13 +65,13 @@ const ListInstructors = () => {
                                   }}
                                 />
                               }
-                            </td>
-                          </tr>
+                            </Td>
+                          </Tr>
                         );
                       }
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
               <Modal
                 title={`Here is a list of ${instructorName}'s courses`}
@@ -78,30 +79,30 @@ const ListInstructors = () => {
                 onCancel={() => setOk(false)}
                 onOk={() => setOk(false)}
               >
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <td>Major</td>
-                      <th>Code</th>
-                      <th>Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="Table">
+                  <Thead>
+                    <Tr>
+                      <Th>#</Th>
+                      <Td>Major</Td>
+                      <Th>Code</Th>
+                      <Th>Name</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {courses &&
                       courses.length > 0 &&
                       courses.map(({ code, name, major }, index) => {
                         return (
-                          <tr>
-                            <th>{index + 1}</th>
-                            <td>{major}</td>
-                            <td>{code}</td>
-                            <td>{name}</td>
-                          </tr>
+                          <Tr>
+                            <Th>{index + 1}</Th>
+                            <Td>{major}</Td>
+                            <Td>{code}</Td>
+                            <Td>{name}</Td>
+                          </Tr>
                         );
                       })}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </Modal>
             </div>
           </div>

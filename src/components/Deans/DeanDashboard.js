@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
-import { Link } from "react-router-dom";
 import GaugeChart from "react-gauge-chart/dist";
 
 const DeanDashboard = ({ maxPC }) => {
   const length = maxPC.length;
-  useEffect(async () => {}, []);
 
   const code = [];
   const student = [];
@@ -28,7 +26,7 @@ const DeanDashboard = ({ maxPC }) => {
           <>
             <div>
               <Bar
-                key={i}
+                key={i + 1 + i * i}
                 width="400"
                 height="400"
                 data={{
@@ -54,6 +52,7 @@ const DeanDashboard = ({ maxPC }) => {
                 }}
               />
               <GaugeChart
+                key={i * i}
                 id="gauge-chart2"
                 nrOfLevels={20}
                 colors={["red", "green"]}

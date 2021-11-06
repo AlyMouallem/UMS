@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BsArrow90DegLeft } from "react-icons/bs";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const ListStudents = () => {
   const [student, setStudent] = useState([]);
 
   useEffect(() => {
+    const getInstructors = async () => {
+      const { data } = await axios.get(`http://localhost:8000/api/students`);
+      setStudent(data);
+      console.log(student);
+    };
     getInstructors();
   }, []);
-
-  const getInstructors = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/students`);
-
-    setStudent(data);
-
-    console.log(student);
-  };
 
   const showStudents = async (name) => {
     window.location = `/students-classes/${name}`;
@@ -30,26 +28,26 @@ const ListStudents = () => {
               <div className="col-3"></div>
               <div>
                 <h1>Below are all the students</h1>
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Major</th>
-                      <th>View Classes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="table responsiveTable">
+                  <Thead>
+                    <Tr>
+                      <Th>#</Th>
+                      <Th>Name</Th>
+                      <Th>Email</Th>
+                      <Th>Major</Th>
+                      <Th>View Classes</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {student.map(
                       ({ first_name, last_name, email, major }, index) => {
                         return (
-                          <tr key={index}>
-                            <th>{index + 1}</th>
-                            <td>{`${first_name} ${last_name}`}</td>
-                            <td>{email}</td>
-                            <td>{major}</td>
-                            <td>
+                          <Tr key={index}>
+                            <Th>{index + 1}</Th>
+                            <Td>{`${first_name} ${last_name}`}</Td>
+                            <Td>{email}</Td>
+                            <Td>{major}</Td>
+                            <Td>
                               {
                                 <BsArrow90DegLeft
                                   onClick={() =>
@@ -61,13 +59,13 @@ const ListStudents = () => {
                                   }}
                                 />
                               }
-                            </td>
-                          </tr>
+                            </Td>
+                          </Tr>
                         );
                       }
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
             </div>
           </div>

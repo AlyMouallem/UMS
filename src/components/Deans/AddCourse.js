@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
 const AddCourses = () => {
   const [majors, setMajors] = useState([]);
@@ -79,7 +79,14 @@ const AddCourses = () => {
           grades: grades,
         });
         toast.success(data.message);
-        window.location = window.location;
+        setcState({
+          major: "",
+          code: "",
+          name: "",
+          instructor: "",
+          time: "",
+          credits: 3,
+        });
       } catch (err) {
         toast.error(err.response.data.message);
       }
@@ -196,20 +203,20 @@ const AddCourses = () => {
                   />
 
                   <h1>Grade distribution:</h1>
-                  <table className="table addcourse ">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Attendance</th>
-                        <th>Midterm</th>
-                        <th>Project</th>
-                        <th>Final</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>Percentage %</th>
-                        <td>
+                  <Table className="table ">
+                    <Thead>
+                      <Tr>
+                        <Th></Th>
+                        <Th>Attendance</Th>
+                        <Th>Midterm</Th>
+                        <Th>Project</Th>
+                        <Th>Final</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      <Tr>
+                        <Th>Percentage %</Th>
+                        <Td>
                           <input
                             value={attendance.percentage}
                             type="number"
@@ -224,11 +231,11 @@ const AddCourses = () => {
                             }
                             min={0}
                             max={100}
-                            className="form-control form-control-sm mx-2"
+                            className="form-control form-control-sm "
                             style={{ width: "3.5rem" }}
                           />
-                        </td>
-                        <td>
+                        </Td>
+                        <Td>
                           <input
                             value={midterm.percentage}
                             type="number"
@@ -246,8 +253,8 @@ const AddCourses = () => {
                             className="form-control form-control-sm"
                             style={{ width: "3.5rem" }}
                           />
-                        </td>
-                        <td>
+                        </Td>
+                        <Td>
                           <input
                             type="number"
                             value={project.percentage}
@@ -265,8 +272,8 @@ const AddCourses = () => {
                             className="form-control form-control-sm"
                             style={{ width: "3.5rem" }}
                           />
-                        </td>
-                        <td>
+                        </Td>
+                        <Td>
                           <input
                             style={{ width: "3.5rem" }}
                             type="number"
@@ -282,10 +289,10 @@ const AddCourses = () => {
                             }
                             className="form-control form-control-sm"
                           />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                        </Td>
+                      </Tr>
+                    </Tbody>
+                  </Table>
                 </div>
                 <button type="submit" className="btn btn-primary col-12">
                   Add Course

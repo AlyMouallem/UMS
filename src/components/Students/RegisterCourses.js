@@ -3,6 +3,7 @@ import axios from "axios";
 import { IoMdAdd } from "react-icons/io";
 import { toast } from "react-toastify";
 import { AiOutlineMinus } from "react-icons/ai";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const RegisterCourses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
@@ -14,20 +15,19 @@ const RegisterCourses = () => {
   const [credits, setCredits] = useState(0);
 
   useEffect(() => {
-    state && getCourses();
+    const getCourses = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8000/api/classes/${name}/No/`
+        );
+        await getRegistered();
+        setCourses(data.map(({ course }) => course));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getCourses();
   }, []);
-
-  const getCourses = async () => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/classes/${name}/No/`
-      );
-      await getRegistered();
-      setCourses(data.map(({ course }) => course));
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const getRegistered = async () => {
     try {
@@ -104,28 +104,28 @@ const RegisterCourses = () => {
             <div className="row ">
               <div className="col-1"></div>
               <div className="col-10 py-3">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Course Code</th>
-                      <th>Course Name</th>
-                      <th>Instructor</th>
-                      <th>Time</th>
-                      <th>Credits</th>
-                      <th>Register</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="table">
+                  <Thead>
+                    <Tr>
+                      <Th>Course Code</Th>
+                      <Th>Course Name</Th>
+                      <Th>Instructor</Th>
+                      <Th>Time</Th>
+                      <Th>Credits</Th>
+                      <Th>Register</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {courses.map(
                       ({ code, name, instructor, time, credits }, index) => {
                         return (
-                          <tr key={index}>
-                            <td>{code}</td>
-                            <td>{name}</td>
-                            <td>{instructor}</td>
-                            <td>{time}</td>
-                            <td>{credits}</td>
-                            <td>
+                          <Tr key={index}>
+                            <Td>{code}</Td>
+                            <Td>{name}</Td>
+                            <Td>{instructor}</Td>
+                            <Td>{time}</Td>
+                            <Td>{credits}</Td>
+                            <Td>
                               <IoMdAdd
                                 style={{
                                   color: "darkGreen",
@@ -134,13 +134,13 @@ const RegisterCourses = () => {
                                 }}
                                 onClick={() => handleAdd(code)}
                               />
-                            </td>
-                          </tr>
+                            </Td>
+                          </Tr>
                         );
                       }
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
               <div className="col-1"></div>
             </div>
@@ -163,27 +163,27 @@ const RegisterCourses = () => {
             <div className="row ">
               <div className="col-1"></div>
               <div className="col-10 py-3">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Course Code</th>
-                      <th>Course Name</th>
-                      <th>Instructor</th>
-                      <th>Time</th>
-                      <th>Credits</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="Table">
+                  <Thead>
+                    <Tr>
+                      <Th>Course Code</Th>
+                      <Th>Course Name</Th>
+                      <Th>Instructor</Th>
+                      <Th>Time</Th>
+                      <Th>Credits</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {registered.map(
                       ({ code, name, instructor, time, credits }, index) => {
                         return (
-                          <tr key={index}>
-                            <td>{code}</td>
-                            <td>{name}</td>
-                            <td>{instructor}</td>
-                            <td>{time}</td>
-                            <td>{credits}</td>
-                            <td>
+                          <Tr key={index}>
+                            <Td>{code}</Td>
+                            <Td>{name}</Td>
+                            <Td>{instructor}</Td>
+                            <Td>{time}</Td>
+                            <Td>{credits}</Td>
+                            <Td>
                               <AiOutlineMinus
                                 style={{
                                   color: "red",
@@ -192,13 +192,13 @@ const RegisterCourses = () => {
                                 }}
                                 onClick={() => handleRemove(code)}
                               />
-                            </td>
-                          </tr>
+                            </Td>
+                          </Tr>
                         );
                       }
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
 
                 <button
                   onClick={handleRegister}

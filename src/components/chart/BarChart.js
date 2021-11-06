@@ -9,29 +9,32 @@ const BarChart = ({ courses }) => {
     grades.reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / grades.length;
   const codes = courses.map(({ code }) => code);
 
-  useEffect(async () => {
-    await getColors(grades);
+  useEffect(() => {
+    const getColors = async (grades) => {
+      for (let i = 0; i < grades.length; i++) {
+        console.log(grades[i]);
+        switch (true) {
+          case parseInt(grades[i]) < 60:
+            colors[i] = "red";
+            break;
+          case 60 <= parseInt(grades[i]) && parseInt(grades[i]) < 70:
+            colors[i] = "orangered";
+            break;
+          case 70 <= parseInt(grades[i]) && parseInt(grades[i]) < 80:
+            colors[i] = "lightgreen";
+            break;
+          case parseInt(grades[i]) >= 80:
+            colors[i] = "green";
+            break;
+          default:
+            colors[i] = "red";
+            break;
+        }
+      }
+    };
+    getColors(grades);
   }, []);
 
-  const getColors = async (grades) => {
-    for (let i = 0; i < grades.length; i++) {
-      console.log(grades[i]);
-      switch (true) {
-        case parseInt(grades[i]) < 60:
-          colors[i] = "red";
-          break;
-        case 60 <= parseInt(grades[i]) && parseInt(grades[i]) < 70:
-          colors[i] = "orangered";
-          break;
-        case 70 <= parseInt(grades[i]) && parseInt(grades[i]) < 80:
-          colors[i] = "lightgreen";
-          break;
-        case parseInt(grades[i]) >= 80:
-          colors[i] = "green";
-          break;
-      }
-    }
-  };
   const data = {
     labels: codes,
     datasets: [

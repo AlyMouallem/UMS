@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import AuthForm from "./forms/AuthForm";
 import { Redirect } from "react-router";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("ali@gmail.com");

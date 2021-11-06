@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsArrow90DegLeft } from "react-icons/bs";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const IClasses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
@@ -8,14 +9,15 @@ const IClasses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
+    const getInstCourses = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8000/api/courses/instructor/${state.user.name}`
+      );
+      setCourses(data);
+    };
     getInstCourses();
   }, []);
-  const getInstCourses = async () => {
-    const { data } = await axios.get(
-      `http://localhost:8000/api/courses/instructor/${state.user.name}`
-    );
-    setCourses(data);
-  };
+
   const showStudents = async (code) => {
     window.location = `/instructor-students/${code}`;
   };
@@ -31,31 +33,31 @@ const IClasses = () => {
               <div className="container">
                 <div className="row ">
                   <div className="py-3">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Course Code</th>
-                          <th>Course Name</th>
-                          <th>Time</th>
-                          <th>Credits</th>
-                          <th>Major</th>
-                          <th>View Students</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                    <Table className="table">
+                      <Thead>
+                        <Tr>
+                          <Th>#</Th>
+                          <Th>Course Code</Th>
+                          <Th>Course Name</Th>
+                          <Th>Time</Th>
+                          <Th>Credits</Th>
+                          <Th>Major</Th>
+                          <Th>View Students</Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
                         {courses.map(
                           ({ code, name, time, credits, major }, index) => {
                             return (
-                              <tr key={index}>
-                                <th>{index + 1}</th>
-                                <td>{code}</td>
-                                <td>{name}</td>
-                                <td>{time}</td>
-                                <td>{credits}</td>
-                                <td>{major}</td>
+                              <Tr key={index}>
+                                <Th>{index + 1}</Th>
+                                <Td>{code}</Td>
+                                <Td>{name}</Td>
+                                <Td>{time}</Td>
+                                <Td>{credits}</Td>
+                                <Td>{major}</Td>
 
-                                <td>
+                                <Td>
                                   {
                                     <BsArrow90DegLeft
                                       onClick={() => showStudents(code)}
@@ -65,13 +67,13 @@ const IClasses = () => {
                                       }}
                                     />
                                   }
-                                </td>
-                              </tr>
+                                </Td>
+                              </Tr>
                             );
                           }
                         )}
-                      </tbody>
-                    </table>
+                      </Tbody>
+                    </Table>
                   </div>
                 </div>
               </div>

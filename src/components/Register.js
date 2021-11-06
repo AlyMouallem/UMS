@@ -19,21 +19,20 @@ const Register = () => {
   const [instructor, setInstructor] = useState(false);
 
   useEffect(() => {
+    const getMajors = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8000/api/majors");
+
+        setMajors(
+          ...majors,
+          data.map((data) => data.name)
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getMajors();
   }, []);
-
-  const getMajors = async () => {
-    try {
-      const { data } = await axios.get("http://localhost:8000/api/majors");
-
-      setMajors(
-        ...majors,
-        data.map((data) => data.name)
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

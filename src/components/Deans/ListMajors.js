@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import { MinusOutlined } from "@ant-design/icons";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
 const ListMajors = () => {
   const [majors, setMajors] = useState([]);
@@ -41,33 +40,33 @@ const ListMajors = () => {
               <div className="col-1"></div>
               <div className="col-10">
                 <h1>Below are all the majors</h1>
-                <table className="table ">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="table ">
+                  <Thead>
+                    <Tr>
+                      <Th>#</Th>
+                      <Th>Name</Th>
+                      <Th>Delete</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {majors.map(({ name }, index) => {
                       return (
-                        <tr key={index}>
-                          <th>{index + 1}</th>
-                          <td>{name}</td>
-                          <td>
+                        <Tr key={index}>
+                          <Th>{index + 1}</Th>
+                          <Td>{name}</Td>
+                          <Td>
                             <button
                               className="btn btn-danger"
                               onClick={() => handleDelete(name)}
                             >
                               Delete
                             </button>
-                          </td>
-                        </tr>
+                          </Td>
+                        </Tr>
                       );
                     })}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { AppstoreFilled } from "@ant-design/icons";
 import { Modal } from "antd";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
 const Classes = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
@@ -21,19 +22,18 @@ const Classes = () => {
 
   const [code, setCode] = useState("");
   useEffect(() => {
+    const getMyCourses = async () => {
+      const name2search = role === "Student" ? name : dName;
+      const { data } = await axios.get(
+        `http://localhost:8000/api/classes/${name2search}/Yes`
+      );
+      setCourses(data.map(({ course }) => course));
+    };
     state && getMyCourses();
   }, [state]);
 
   const index = window.location.pathname.lastIndexOf("/");
   const dName = window.location.pathname.slice(index + 1);
-  console.log({ dName, index });
-  const getMyCourses = async () => {
-    const name2search = role === "Student" ? name : dName;
-    const { data } = await axios.get(
-      `http://localhost:8000/api/classes/${name2search}/Yes`
-    );
-    setCourses(data.map(({ course }) => course));
-  };
 
   const showGrades = async (code) => {
     setOk(true);
@@ -57,30 +57,30 @@ const Classes = () => {
           <div className="container">
             <div className="row ">
               <div className="py-3">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Course Code</th>
-                      <th>Course Name</th>
-                      <th>Instructor</th>
-                      <th>Time</th>
-                      <th>Credits</th>
-                      <th>Grades</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <Table className="table">
+                  <Thead>
+                    <Tr>
+                      <Th>#</Th>
+                      <Th>Course Code</Th>
+                      <Th>Course Name</Th>
+                      <Th>Instructor</Th>
+                      <Th>Time</Th>
+                      <Th>Credits</Th>
+                      <Th>Grades</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {courses.map(
                       ({ code, name, instructor, time, credits }, index) => {
                         return (
-                          <tr key={code}>
-                            <th>{index + 1}</th>
-                            <td>{code}</td>
-                            <td>{name}</td>
-                            <td>{instructor}</td>
-                            <td>{time}</td>
-                            <td>{credits}</td>
-                            <td>
+                          <Tr key={code}>
+                            <Th>{index + 1}</Th>
+                            <Td>{code}</Td>
+                            <Td>{name}</Td>
+                            <Td>{instructor}</Td>
+                            <Td>{time}</Td>
+                            <Td>{credits}</Td>
+                            <Td>
                               {
                                 <AppstoreFilled
                                   onClick={() => showGrades(code)}
@@ -90,13 +90,13 @@ const Classes = () => {
                                   }}
                                 />
                               }
-                            </td>
-                          </tr>
+                            </Td>
+                          </Tr>
                         );
                       }
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
               </div>
             </div>
             <div className="row">
@@ -112,71 +112,71 @@ const Classes = () => {
                   footer={null}
                 >
                   <>
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Title</th>
-                          <th>Percentage</th>
-                          <th>Grade</th>
-                          <th>Total=Grade x Percentage</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Attendance</td>
-                          <td>{attendance.percentage}%</td>
-                          <td>{attendance.mark}</td>
-                          <td>
+                    <Table className="Table">
+                      <Thead>
+                        <Tr>
+                          <Th>#</Th>
+                          <Th>Title</Th>
+                          <Th>Percentage</Th>
+                          <Th>Grade</Th>
+                          <Th>Total=Grade x Percentage</Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        <Tr>
+                          <Td>1</Td>
+                          <Td>Attendance</Td>
+                          <Td>{attendance.percentage}%</Td>
+                          <Td>{attendance.mark}</Td>
+                          <Td>
                             {(
                               (attendance.mark * attendance.percentage) /
                               100
                             ).toFixed(2)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Midterm</td>
-                          <td>{midterm.percentage}%</td>
-                          <td>{midterm.mark}</td>
-                          <td>
+                          </Td>
+                        </Tr>
+                        <Tr>
+                          <Td>2</Td>
+                          <Td>Midterm</Td>
+                          <Td>{midterm.percentage}%</Td>
+                          <Td>{midterm.mark}</Td>
+                          <Td>
                             {(
                               (midterm.mark * midterm.percentage) /
                               100
                             ).toFixed(2)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Project</td>
-                          <td>{project.percentage}%</td>
-                          <td>{project.mark}</td>
-                          <td>
+                          </Td>
+                        </Tr>
+                        <Tr>
+                          <Td>3</Td>
+                          <Td>Project</Td>
+                          <Td>{project.percentage}%</Td>
+                          <Td>{project.mark}</Td>
+                          <Td>
                             {(
                               (project.mark * project.percentage) /
                               100
                             ).toFixed(2)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>Final</td>
-                          <td>{final.percentage}%</td>
-                          <td>{final.mark}</td>
-                          <td>
+                          </Td>
+                        </Tr>
+                        <Tr>
+                          <Td>4</Td>
+                          <Td>Final</Td>
+                          <Td>{final.percentage}%</Td>
+                          <Td>{final.mark}</Td>
+                          <Td>
                             {((final.mark * final.percentage) / 100).toFixed(2)}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>Final Average</td>
-                          <td colSpan="2">100%</td>
+                          </Td>
+                        </Tr>
+                        <Tr>
+                          <Td>5</Td>
+                          <Td>Final Average</Td>
+                          <Td colSpan="2">100%</Td>
 
-                          <td>{total}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          <Td>{total}</Td>
+                        </Tr>
+                      </Tbody>
+                    </Table>
                   </>
                 </Modal>
               </div>

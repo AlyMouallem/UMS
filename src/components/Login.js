@@ -11,10 +11,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/signin", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://myuniversitymu.herokuapp.com/auth/signin",
+        {
+          email,
+          password,
+        }
+      );
       window.localStorage.setItem("auth", JSON.stringify(data));
 
       window.location = "/dashboard";

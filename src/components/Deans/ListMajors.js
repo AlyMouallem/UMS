@@ -11,7 +11,9 @@ const ListMajors = () => {
   }, []);
 
   const getMajors = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/majors`);
+    const { data } = await axios.get(
+      `https://myuniversitymu.herokuapp.com/api/majors`
+    );
     setMajors(
       data.map(({ name }) => ({
         name,
@@ -20,9 +22,12 @@ const ListMajors = () => {
   };
 
   const handleDelete = async (name) => {
-    const { data } = await axios.delete(`http://localhost:8000/api/majors`, {
-      data: { name },
-    });
+    const { data } = await axios.delete(
+      `https://myuniversitymu.herokuapp.com/api/majors`,
+      {
+        data: { name },
+      }
+    );
     toast.success(data.message);
 
     setMajors(majors.filter((major) => major.name !== name));

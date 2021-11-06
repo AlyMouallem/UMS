@@ -25,7 +25,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       You can check detailed marks{" "}
-                      <Link to="/students-classes">
+                      <Link to="https://myuniversitymu.herokuapp.com/students-classes">
                         <span style={{ color: "red" }}>Here</span>
                       </Link>{" "}
                     </h4>
@@ -42,7 +42,7 @@ const Dashboard = () => {
             ) : (
               <h4>
                 You have not registered any course yet. Please register{" "}
-                <Link to="/register-courses">
+                <Link to="https://myuniversitymu.herokuapp.com/register-courses">
                   <span style={{ color: "red" }}>Here</span>
                 </Link>
               </h4>

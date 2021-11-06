@@ -25,7 +25,7 @@ const InstructorDashboard = ({ maxPC }) => {
         {[...Array(length)].map((x, i) => (
           <>
             <div>
-              <Link to={`instructor-students/${code[i][0]}`}>
+              <Link to={`https://myuniversitymu.herokuapp.com/instructor-students/${code[i][0]}`}>
                 <h1> {code[i][0]}</h1>
               </Link>
               <Bar

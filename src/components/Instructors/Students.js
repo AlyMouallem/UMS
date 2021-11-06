@@ -44,7 +44,7 @@ const Students = () => {
   }, []);
   const getInstCourses = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/api/instructor-classes/${state.user.name}/${code}`
+      `https://myuniversitymu.herokuapp.com/api/instructor-classes/${state.user.name}/${code}`
     );
 
     setCourses(
@@ -65,7 +65,7 @@ const Students = () => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:8000/api/instructor-classes/${name}/${student.student}/${student.code}`,
+        `https://myuniversitymu.herokuapp.com/api/instructor-classes/${name}/${student.student}/${student.code}`,
         { ...grade, total: parseFloat(total) }
       );
 

@@ -24,7 +24,9 @@ const Register = () => {
 
   const getMajors = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/majors");
+      const { data } = await axios.get(
+        "https://myuniversitymu.herokuapp.com/api/majors"
+      );
 
       setMajors(
         ...majors,
@@ -40,13 +42,16 @@ const Register = () => {
     setLoading(true);
     if (!instructor) {
       try {
-        const { data } = await axios.post("http://localhost:8000/api/users", {
-          first_name,
-          last_name,
-          email,
-          password,
-          major,
-        });
+        const { data } = await axios.post(
+          "https://myuniversitymu.herokuapp.com/api/users",
+          {
+            first_name,
+            last_name,
+            email,
+            password,
+            major,
+          }
+        );
 
         toast.success(data.message);
         setLoading(false);
@@ -61,13 +66,16 @@ const Register = () => {
       }
     } else {
       try {
-        const { data } = await axios.post("http://localhost:8000/api/users", {
-          first_name,
-          last_name,
-          email,
-          password,
-          role: "Instructor",
-        });
+        const { data } = await axios.post(
+          "https://myuniversitymu.herokuapp.com/api/users",
+          {
+            first_name,
+            last_name,
+            email,
+            password,
+            role: "Instructor",
+          }
+        );
 
         setTimeout(500);
         toast.success(data.message);

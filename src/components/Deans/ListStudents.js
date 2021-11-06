@@ -9,7 +9,7 @@ const ListStudents = () => {
   }, []);
 
   const getInstructors = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/students`);
+    const { data } = await axios.get(`https://myuniversitymu.herokuapp.com/api/students`);
 
     setStudent(data);
 

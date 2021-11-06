@@ -13,14 +13,16 @@ const ListStudents = () => {
 
   const handleDelete = async (code) => {
     const { data } = await axios.delete(
-      `http://localhost:8000/api/courses/code/${code}`
+      `https://myuniversitymu.herokuapp.com/api/courses/code/${code}`
     );
     toast.success(data.message);
 
     setCourses(courses.filter((course) => course.code !== code));
   };
   const getCourses = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/courses`);
+    const { data } = await axios.get(
+      `https://myuniversitymu.herokuapp.com/api/courses`
+    );
     setCourses(data);
   };
 

@@ -7,9 +7,12 @@ const AddMajor = () => {
   const [name, setName] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post(`http://localhost:8000/api/majors`, {
-      name,
-    });
+    const { data } = await axios.post(
+      `https://myuniversitymu.herokuapp.com/api/majors`,
+      {
+        name,
+      }
+    );
 
     toast.success(data.message);
     setTimeout(3000, setName(""));

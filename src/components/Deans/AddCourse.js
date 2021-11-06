@@ -48,7 +48,9 @@ const AddCourses = () => {
   }, [state]);
   const getMajors = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/majors");
+      const { data } = await axios.get(
+        "https://myuniversitymu.herokuapp.com/api/majors"
+      );
 
       setMajors(data.map((data) => data.name));
     } catch (err) {
@@ -57,7 +59,9 @@ const AddCourses = () => {
   };
   const getInstructors = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/instructors");
+      const { data } = await axios.get(
+        "https://myuniversitymu.herokuapp.com/api/instructors"
+      );
 
       setInstructors(data);
     } catch (err) {
@@ -74,10 +78,13 @@ const AddCourses = () => {
       );
     } else {
       try {
-        const { data } = await axios.post("http://localhost:8000/api/courses", {
-          cstate,
-          grades: grades,
-        });
+        const { data } = await axios.post(
+          "https://myuniversitymu.herokuapp.com/api/courses",
+          {
+            cstate,
+            grades: grades,
+          }
+        );
         toast.success(data.message);
         window.location = window.location;
       } catch (err) {

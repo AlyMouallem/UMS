@@ -14,14 +14,16 @@ const ListInstructors = () => {
   }, []);
 
   const getInstructors = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/instructors/`);
+    const { data } = await axios.get(
+      `https://myuniversitymu.herokuapp.com/api/instructors/`
+    );
     setInstructors(data);
   };
   const showCourses = async (name) => {
     setOk(true);
     setInstructorName(name);
     const { data } = await axios.get(
-      `http://localhost:8000/api/courses/instructor/${name}`
+      `https://myuniversitymu.herokuapp.com/api/courses/instructor/${name}`
     );
     setCourses(data);
   };

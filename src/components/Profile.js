@@ -30,7 +30,7 @@ const Profile = () => {
   const handleChange = async () => {
     try {
       const { data } = await axios.put(
-        `http://localhost:8000/api/users/${_id}`,
+        `https://myuniversitymu.herokuapp.com/api/users/${_id}`,
         {
           name: nameE,
           email: emailE,
@@ -50,7 +50,7 @@ const Profile = () => {
   const handleDelete = async () => {
     try {
       const result = await axios.delete(
-        `http://localhost:8000/api/users/${_id}`
+        `https://myuniversitymu.herokuapp.com/api/users/${_id}`
       );
       console.log(result);
 

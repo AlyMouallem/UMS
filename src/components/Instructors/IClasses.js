@@ -12,12 +12,12 @@ const IClasses = () => {
   }, []);
   const getInstCourses = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/api/courses/instructor/${state.user.name}`
+      `https://myuniversitymu.herokuapp.com/api/courses/instructor/${state.user.name}`
     );
     setCourses(data);
   };
   const showStudents = async (code) => {
-    window.location = `/instructor-students/${code}`;
+    window.location = `https://myuniversitymu.herokuapp.com/instructor-students/${code}`;
   };
 
   return (

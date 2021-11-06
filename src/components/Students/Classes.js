@@ -7,7 +7,7 @@ import { Modal } from "antd";
 const Classes = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
-  const { name } = user;
+  const { name, role } = user;
   const [courses, setCourses] = useState([]);
   const [ok, setOk] = useState(false);
   const [grade, setGrade] = useState({
@@ -19,31 +19,40 @@ const Classes = () => {
   });
   const { attendance, midterm, project, final, total } = grade;
 
+  const [code, setCode] = useState("");
   useEffect(() => {
     state && getMyCourses();
   }, [state]);
 
+  const index = window.location.pathname.lastIndexOf("/");
+  const dName = window.location.pathname.slice(index + 1);
+  console.log({ dName, index });
   const getMyCourses = async () => {
+    const name2search = role === "Student" ? name : dName;
     const { data } = await axios.get(
-      `http://localhost:8000/api/classes/${name}/Yes`
+      `http://localhost:8000/api/classes/${name2search}/Yes`
     );
     setCourses(data.map(({ course }) => course));
   };
 
   const showGrades = async (code) => {
     setOk(true);
+    setCode(code);
     const course = courses.filter((course) => course.code === code);
 
     const { grades } = course[0];
     setGrade(grades);
-    // console.log(grade);
   };
-
+  var decodeURI = decodeURIComponent(dName);
   return (
     <>
       {courses && courses.length > 0 ? (
         <>
-          <h1> Here are your courses</h1>
+          {role === "Student" ? (
+            <h1> Here are your courses</h1>
+          ) : (
+            <h1> Here are {decodeURI}'s courses</h1>
+          )}
 
           <div className="container">
             <div className="row ">
@@ -93,7 +102,11 @@ const Classes = () => {
             <div className="row">
               <div className="col">
                 <Modal
-                  title="Your grades"
+                  title={
+                    role === "Student"
+                      ? `Your ${code} grades`
+                      : `${decodeURI}'s ${code} grades`
+                  }
                   visible={ok}
                   onCancel={() => setOk(false)}
                   footer={null}

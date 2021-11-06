@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { BsArrow90DegLeft } from "react-icons/bs";
 
 const ListStudents = () => {
   const [student, setStudent] = useState([]);
@@ -15,6 +16,11 @@ const ListStudents = () => {
 
     console.log(student);
   };
+
+  const showStudents = async (name) => {
+    window.location = `/students-classes/${name}`;
+  };
+
   return (
     <>
       {student && student.length > 0 && (
@@ -31,7 +37,7 @@ const ListStudents = () => {
                       <th>Name</th>
                       <th>Email</th>
                       <th>Major</th>
-                      <th></th>
+                      <th>View Classes</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -43,6 +49,19 @@ const ListStudents = () => {
                             <td>{`${first_name} ${last_name}`}</td>
                             <td>{email}</td>
                             <td>{major}</td>
+                            <td>
+                              {
+                                <BsArrow90DegLeft
+                                  onClick={() =>
+                                    showStudents(`${first_name} ${last_name}`)
+                                  }
+                                  style={{
+                                    fontSize: "20px",
+                                    cursor: "pointer",
+                                  }}
+                                />
+                              }
+                            </td>
                           </tr>
                         );
                       }

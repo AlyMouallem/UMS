@@ -3,11 +3,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import AuthForm from "./forms/AuthForm";
 import { Redirect } from "react-router";
+import { useHistory, Link } from "react-router-dom";
+
 const Login = () => {
   const [email, setEmail] = useState("ali@gmail.com");
   const [password, setPassword] = useState("batata");
   const [loading, setLoading] = useState(false);
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
+  const router = useHistory();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -15,9 +18,10 @@ const Login = () => {
         email,
         password,
       });
-      window.localStorage.setItem("auth", JSON.stringify(data));
 
-      window.location = "/dashboard";
+      window.localStorage.setItem("auth", JSON.stringify(data));
+      window.location = "/";
+      router.push("/dashboard");
     } catch (err) {
       toast.error(err.response.data.error);
       setLoading(false);

@@ -20,12 +20,16 @@ const ListMajors = () => {
   };
 
   const handleDelete = async (name) => {
-    const { data } = await axios.delete(`http://localhost:8000/api/majors`, {
-      data: { name },
-    });
-    toast.success(data.message);
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:8000/api/majors/${name}`
+      );
+      toast.success(data.message);
 
-    setMajors(majors.filter((major) => major.name !== name));
+      setMajors(majors.filter((major) => major.name !== name));
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -52,12 +56,12 @@ const ListMajors = () => {
                           <th>{index + 1}</th>
                           <td>{name}</td>
                           <td>
-                            <MinusOutlined
-                              className="btn btn-danger btn-sm"
+                            <button
+                              className="btn btn-danger"
                               onClick={() => handleDelete(name)}
                             >
                               Delete
-                            </MinusOutlined>
+                            </button>
                           </td>
                         </tr>
                       );

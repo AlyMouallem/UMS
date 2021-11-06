@@ -43,7 +43,9 @@ const Navbar = () => {
               state.user.role === "Student" && (
                 <>
                   <Item key={10} icon={<AiOutlineHome />}>
-                    <Link to="/students-classes">My Classes</Link>
+                    <Link to={`/students-classes/${state.user.name}`}>
+                      My Classes
+                    </Link>
                   </Item>
                   <Item key={20} icon={<PlusOutlined />}>
                     <Link to="/register-courses">Register Courses</Link>

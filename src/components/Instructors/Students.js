@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 const Students = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
-  const { name } = user;
+  const { name, role } = user;
   const [courses, setCourses] = useState([]);
   const [ok, setOk] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -43,9 +43,13 @@ const Students = () => {
     getInstCourses();
   }, []);
   const getInstCourses = async () => {
-    const { data } = await axios.get(
-      `http://localhost:8000/api/instructor-classes/${state.user.name}/${code}`
-    );
+    const { data } =
+      role === "Instructor"
+        ? await axios.get(
+            `http://localhost:8000/api/instructor-classes/${state.user.name}/${code}`
+          )
+        : role === "Dean" &&
+          (await axios.get(`http://localhost:8000/api/code-classes/${code}`));
 
     setCourses(
       data.map(({ course, student }) => ({
@@ -82,7 +86,11 @@ const Students = () => {
         <>
           {courses.length > 0 ? (
             <>
-              <h1> Here is a list of your {code} students</h1>
+              {role === "Instructor" ? (
+                <h1> Here is a list of your {code} students</h1>
+              ) : (
+                <h1> Here is a list of {code} students</h1>
+              )}
 
               <div className="container">
                 <div className="row ">

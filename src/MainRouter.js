@@ -17,6 +17,7 @@ import Students from "./components/Instructors/Students";
 import IClasses from "./components/Instructors/IClasses";
 import Profile from "./components/Profile";
 import InstructorDashboard from "./components/Instructors/InstructorDashboard";
+import DeanDashboard from "./components/Deans/DeanDashboard";
 const MainRouter = () => {
   return (
     <>
@@ -31,12 +32,13 @@ const MainRouter = () => {
         <Route exact path="/list-majors" component={ListMajors} />
         <Route exact path="/add-course" component={AddCourse} />
         <Route exact path="/add-major" component={AddMajor} />
-        <Route exact path="/students-classes" component={Classes} />
+        <Route exact path="/students-classes/:name" component={Classes} />
         <Route exact path="/instructor-students/:code" component={Students} />
         <Route exact path="/instructor-classes" component={IClasses} />
         <Route exact path="/register-courses" component={RegisterCourses} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/idashboard" component={InstructorDashboard} />
+        <Route exact path="/ddashboard" component={DeanDashboard} />
         <Route path="*" exact component={PageNotFound} />
       </Switch>
     </>

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
-import { MinusOutlined } from "@ant-design/icons";
-
+import { BsArrow90DegLeft } from "react-icons/bs";
 const ListStudents = () => {
   const [courses, setCourses] = useState([]);
 
@@ -22,6 +20,9 @@ const ListStudents = () => {
   const getCourses = async () => {
     const { data } = await axios.get(`http://localhost:8000/api/courses`);
     setCourses(data);
+  };
+  const showStudents = (code) => {
+    window.location = `instructor-students/${code}`;
   };
 
   return (
@@ -42,6 +43,7 @@ const ListStudents = () => {
                       <th>Major</th>
                       <th>Instructor</th>
                       <th>Time</th>
+                      <th>View students</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -57,12 +59,24 @@ const ListStudents = () => {
                             <td>{instructor}</td>
                             <td>{time}</td>
                             <td>
-                              <MinusOutlined
-                                className="btn btn-sm btn-danger"
+                              {" "}
+                              {
+                                <BsArrow90DegLeft
+                                  onClick={() => showStudents(code)}
+                                  style={{
+                                    fontSize: "20px",
+                                    cursor: "pointer",
+                                  }}
+                                />
+                              }
+                            </td>
+                            <td>
+                              <button
+                                className="btn btn-danger"
                                 onClick={() => handleDelete(code)}
                               >
                                 Delete
-                              </MinusOutlined>
+                              </button>
                             </td>
                           </tr>
                         );

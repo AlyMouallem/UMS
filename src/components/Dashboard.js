@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BarChart from "./chart/BarChart";
 import InstructorDashboard from "./Instructors/InstructorDashboard";
-
+import DeanDashboard from "./Deans/DeanDashboard";
 const Dashboard = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
 
   const { user, courses, coursesWM, maxMin } = state;
-  const { role } = user;
+  const { role, name } = user;
 
   return (
     <div className="container">
@@ -25,7 +25,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       You can check detailed marks{" "}
-                      <Link to="/students-classes">
+                      <Link to={`/students-classes/${name}`}>
                         <span style={{ color: "red" }}>Here</span>
                       </Link>{" "}
                     </h4>
@@ -52,12 +52,20 @@ const Dashboard = () => {
           <>
             {role === "Instructor" && (
               <>
-                <InstructorDashboard maxPC={maxMin} courses={coursesWM} />
+                {coursesWM.length > 0 ? (
+                  <InstructorDashboard maxPC={maxMin} courses={coursesWM} />
+                ) : (
+                  <h4>You have no student marks published.</h4>
+                )}
               </>
             )}
           </>
         )}
-        {role === "Dean" && <h1>Dean</h1>}
+        {role === "Dean" && (
+          <>
+            <DeanDashboard maxPC={maxMin} />
+          </>
+        )}
       </>
     </div>
   );

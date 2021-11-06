@@ -9,7 +9,6 @@ const InstructorDashboard = ({ maxPC }) => {
   const code = [];
   const student = [];
   const mark = [];
-  const colors = [];
   const average = [];
   for (let i = 0; i < maxPC.length; i++) {
     code[i] = maxPC[i].map(({ code }) => code);
@@ -37,7 +36,17 @@ const InstructorDashboard = ({ maxPC }) => {
                     {
                       label: code[i][0],
                       data: mark[i],
-                      color: colors,
+                      backgroundColor: function (context) {
+                        const index = context.dataIndex;
+                        const value = context.dataset.data[index];
+                        return value < 60
+                          ? "red"
+                          : value >= 60 && value < 70
+                          ? "orangered"
+                          : value >= 70 && value < 80
+                          ? "lightgreen"
+                          : value >= 80 && "green";
+                      },
                     },
                   ],
                   options: {
@@ -46,7 +55,7 @@ const InstructorDashboard = ({ maxPC }) => {
                         max: 100,
                         min: 0,
                         ticks: {
-                          stepSize: 5,
+                          stepSize: 10,
                         },
                       },
                     },

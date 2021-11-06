@@ -1,39 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Bar } from "react-chartjs-2";
 import GaugeChart from "react-gauge-chart/dist";
 
 const BarChart = ({ courses }) => {
-  const colors = [];
   const grades = courses.map(({ grade }) => parseFloat(grade));
   const average =
     grades.reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / grades.length;
   const codes = courses.map(({ code }) => code);
-
-  useEffect(() => {
-    const getColors = async (grades) => {
-      for (let i = 0; i < grades.length; i++) {
-        console.log(grades[i]);
-        switch (true) {
-          case parseInt(grades[i]) < 60:
-            colors[i] = "red";
-            break;
-          case 60 <= parseInt(grades[i]) && parseInt(grades[i]) < 70:
-            colors[i] = "orangered";
-            break;
-          case 70 <= parseInt(grades[i]) && parseInt(grades[i]) < 80:
-            colors[i] = "lightgreen";
-            break;
-          case parseInt(grades[i]) >= 80:
-            colors[i] = "green";
-            break;
-          default:
-            colors[i] = "red";
-            break;
-        }
-      }
-    };
-    getColors(grades);
-  }, []);
 
   const data = {
     labels: codes,
@@ -41,17 +14,26 @@ const BarChart = ({ courses }) => {
       {
         label: "Average",
         data: grades,
-        color: colors,
-        backgroundColor: colors,
+        backgroundColor: function (context) {
+          const index = context.dataIndex;
+          const value = context.dataset.data[index];
+          return value < 60
+            ? "red"
+            : value >= 60 && value < 70
+            ? "orangered"
+            : value >= 70 && value < 80
+            ? "lightgreen"
+            : value >= 80 && "green";
+        },
       },
     ],
     options: {
       scales: {
         y: {
-          max: 100,
           min: 0,
+          max: 100,
           ticks: {
-            stepSize: 5,
+            stepSize: 10,
           },
         },
       },

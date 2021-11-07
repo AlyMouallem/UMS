@@ -52,22 +52,20 @@ const AddCourses = () => {
 
       setMajors(data.map((data) => data.name));
     } catch (err) {
-      console.log(err);
+      toast.error("Error. Try again later.");
     }
   };
   const getInstructors = async () => {
     try {
       const { data } = await axios.get("http://localhost:8000/api/instructors");
-
       setInstructors(data);
     } catch (err) {
-      console.log(err);
+      toast.error("Error. Try again later.");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (sum !== 100) {
       toast.error(
         `Sum of the grade distribution must be equal to 100, it is ${sum} now. `

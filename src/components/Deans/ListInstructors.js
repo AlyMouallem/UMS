@@ -11,13 +11,15 @@ const ListInstructors = () => {
   const [instructorName, setInstructorName] = useState("");
 
   useEffect(() => {
+    const getInstructors = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8000/api/instructors/`
+      );
+      setInstructors(data);
+    };
     getInstructors();
   }, []);
 
-  const getInstructors = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/instructors/`);
-    setInstructors(data);
-  };
   const showCourses = async (name) => {
     setOk(true);
     setInstructorName(name);
@@ -79,7 +81,7 @@ const ListInstructors = () => {
                 onCancel={() => setOk(false)}
                 onOk={() => setOk(false)}
               >
-                <Table className="Table">
+                <Table className="table">
                   <Thead>
                     <Tr>
                       <Th>#</Th>

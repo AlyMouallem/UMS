@@ -12,9 +12,9 @@ const BarChart = ({ courses }) => {
     labels: codes,
     datasets: [
       {
-        label: "Average",
+        label: "Total",
         data: grades,
-        backgroundColor: function (context) {
+        backgroundColor: (context) => {
           const index = context.dataIndex;
           const value = context.dataset.data[index];
           return value < 60
@@ -27,14 +27,15 @@ const BarChart = ({ courses }) => {
         },
       },
     ],
-    options: {
-      scales: {
-        y: {
-          min: 0,
-          max: 100,
-          ticks: {
-            stepSize: 10,
-          },
+  };
+  const options = {
+    scales: {
+      yAxes: {
+        min: 0,
+        max: 100,
+        ticks: {
+          steps: 10,
+          stepSize: 10,
         },
       },
     },
@@ -54,14 +55,11 @@ const BarChart = ({ courses }) => {
     }
   };
 
-  const getValue = () => {
-    return calculateGpa(parseFloat(average));
-  };
   return (
     <>
       <div className="chart ">
-        <div>
-          <Bar height="400" width="400" data={data} />
+        <div style={{ height: 500, width: 400 }}>
+          <Bar height={300} data={data} options={options} />
           <h2>Total per course</h2>
         </div>
         <div>
@@ -73,14 +71,13 @@ const BarChart = ({ courses }) => {
             percent={average / 100 || 0}
           />
           <h2>Total average %</h2>
-        </div>
-        <div>
+
           <GaugeChart
             id="gauge-chart2"
             nrOfLevels={4}
             colors={["red", "green"]}
             textColor={"black"}
-            formatTextValue={getValue}
+            formatTextValue={() => calculateGpa(parseFloat(average))}
             percent={average / 100 || 0}
           />
           <h2>GPA /4</h2>

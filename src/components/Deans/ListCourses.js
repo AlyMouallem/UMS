@@ -3,9 +3,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BsArrow90DegLeft } from "react-icons/bs";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { useHistory } from "react-router";
 const ListStudents = () => {
   const [courses, setCourses] = useState([]);
-
+  const router = useHistory();
   useEffect(() => {
     getCourses();
   }, []);
@@ -23,7 +24,7 @@ const ListStudents = () => {
     setCourses(data);
   };
   const showStudents = (code) => {
-    window.location = `instructor-students/${code}`;
+    router.push(`instructor-students/${code}`);
   };
 
   return (

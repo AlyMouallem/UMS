@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import AuthForm from "./forms/AuthForm";
 import { Redirect } from "react-router";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("ali@gmail.com");
@@ -20,8 +20,7 @@ const Login = () => {
       });
 
       window.localStorage.setItem("auth", JSON.stringify(data));
-      window.location = "/";
-      router.push("/dashboard");
+      router.go("/dashboard");
     } catch (err) {
       toast.error(err.response.data.error);
       setLoading(false);
@@ -48,7 +47,7 @@ const Login = () => {
           <div className="col">
             <p className="text-center">
               Don't have an account?
-              <a href="/register">Register</a>
+              <Link to="/register">Register</Link>
             </p>
           </div>
         </div>

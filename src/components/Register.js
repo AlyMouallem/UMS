@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 import { Modal } from "antd";
 import AuthForm from "./forms/AuthForm";
 import { Link } from "react-router-dom";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 const Register = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const [first_name, setFirstName] = useState("Ali");
   const [last_name, setLastName] = useState("Mouallem");
-  const [email, setEmail] = useState("ali2@gmail.com");
+  const [email, setEmail] = useState("ali@gmail.com");
   const [password, setPassword] = useState("batata");
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -18,6 +18,7 @@ const Register = () => {
   const [major, setMajor] = useState("");
   const [instructor, setInstructor] = useState(false);
 
+  const router = useHistory();
   useEffect(() => {
     const getMajors = async () => {
       try {
@@ -39,7 +40,7 @@ const Register = () => {
     setLoading(true);
     if (!instructor) {
       try {
-        const { data } = await axios.post("http://localhost:8000/api/users", {
+        const response = await axios.post("http://localhost:8000/api/users", {
           first_name,
           last_name,
           email,
@@ -47,20 +48,22 @@ const Register = () => {
           major,
         });
 
-        toast.success(data.message);
+        localStorage.setItem("auth", JSON.stringify(response.data));
+
+        router.go("/dashboard");
+        toast.success(response.data.message);
         setLoading(false);
         setFirstName("");
         setLastName("");
         setEmail("");
         setPassword("");
-        setOk(data.ok);
       } catch (err) {
         toast.error(err.response.data);
         setLoading(false);
       }
     } else {
       try {
-        const { data } = await axios.post("http://localhost:8000/api/users", {
+        const response = await axios.post("http://localhost:8000/api/users", {
           first_name,
           last_name,
           email,
@@ -68,13 +71,16 @@ const Register = () => {
           role: "Instructor",
         });
 
+        localStorage.setItem("auth", JSON.stringify(response.data));
+
+        router.go("/dashboard");
         setTimeout(500);
-        toast.success(data.message);
+        toast.success(response.data.message);
         setFirstName("");
         setLastName("");
         setEmail("");
         setPassword("");
-        setOk(data.ok);
+        // setOk(data.ok);
         setLoading(false);
       } catch (err) {
         toast.error(err.response.data);
@@ -127,7 +133,7 @@ const Register = () => {
           <div className="col">
             <p className="text-center">
               Already registerd?
-              <a href="/login">Login</a>
+              <Link to="/login">Login</Link>
             </p>
           </div>
         </div>

@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BsArrow90DegLeft } from "react-icons/bs";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { useHistory } from "react-router";
 
 const ListStudents = () => {
   const [student, setStudent] = useState([]);
-
+  const router = useHistory();
   useEffect(() => {
     const getInstructors = async () => {
       const { data } = await axios.get(`http://localhost:8000/api/students`);
       setStudent(data);
-      console.log(student);
     };
     getInstructors();
   }, []);
 
   const showStudents = async (name) => {
-    window.location = `/students-classes/${name}`;
+    router.push(`/students-classes/${name}`);
   };
 
   return (
@@ -28,7 +28,7 @@ const ListStudents = () => {
               <div className="col-3"></div>
               <div>
                 <h1>Below are all the students</h1>
-                <Table className="table responsiveTable">
+                <Table className="table">
                   <Thead>
                     <Tr>
                       <Th>#</Th>

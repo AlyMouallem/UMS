@@ -28,8 +28,8 @@ const InstructorDashboard = ({ maxPC }) => {
               </Link>
               <Bar
                 key={i}
-                width="400"
                 height="400"
+                width="350"
                 data={{
                   labels: student[i],
                   datasets: [

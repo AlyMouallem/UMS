@@ -40,7 +40,7 @@ const ListMajors = () => {
               <div className="col-1"></div>
               <div className="col-10">
                 <h1>Below are all the majors</h1>
-                <Table className="table ">
+                <Table className="table">
                   <Thead>
                     <Tr>
                       <Th>#</Th>

@@ -4,6 +4,7 @@ import { IoMdAdd } from "react-icons/io";
 import { toast } from "react-toastify";
 import { AiOutlineMinus } from "react-icons/ai";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { useHistory } from "react-router";
 
 const RegisterCourses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
@@ -11,8 +12,8 @@ const RegisterCourses = () => {
   const { major, name } = user;
   const [courses, setCourses] = useState([]);
   const [registered, setRegistered] = useState([]);
-
   const [credits, setCredits] = useState(0);
+  const router = useHistory();
 
   useEffect(() => {
     const getCourses = async () => {
@@ -23,7 +24,7 @@ const RegisterCourses = () => {
         await getRegistered();
         setCourses(data.map(({ course }) => course));
       } catch (err) {
-        console.log(err);
+        toast.error("Error. Try again later.");
       }
     };
     getCourses();
@@ -36,7 +37,7 @@ const RegisterCourses = () => {
       );
       setCredits(data.length * 3);
     } catch (err) {
-      console.log(err);
+      toast.error("Error. Try again later.");
     }
   };
 
@@ -84,11 +85,10 @@ const RegisterCourses = () => {
       );
 
       toast.success(data.message);
-      // window.localStorage.setItem("auth", JSON.stringify(data.auth));
 
-      setTimeout(() => (window.location = "/students-classes"), 2500);
+      router.push(`/students-classes/${name}`);
     } catch (err) {
-      console.log(err);
+      toast.error("Error. Try again later.");
     }
   };
 
@@ -146,11 +146,10 @@ const RegisterCourses = () => {
             </div>
           </div>
         </>
+      ) : credits === 18 ? (
+        <h1>You have reached 18 credits. You cannot register more.</h1>
       ) : (
-        <>
-          <h1>You have reached 18 credits. You cannot register more.</h1>
-          <hr />
-        </>
+        <h1>There are no courses to register.</h1>
       )}
       <h4 style={{ textAlign: "center" }}>{credits} credits registered </h4>
       {registered && registered.length > 0 ? (
@@ -163,7 +162,7 @@ const RegisterCourses = () => {
             <div className="row ">
               <div className="col-1"></div>
               <div className="col-10 py-3">
-                <Table className="Table">
+                <Table className="table">
                   <Thead>
                     <Tr>
                       <Th>Course Code</Th>

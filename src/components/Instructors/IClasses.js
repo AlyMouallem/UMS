@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsArrow90DegLeft } from "react-icons/bs";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import { useHistory } from "react-router";
 
 const IClasses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
-
   const [courses, setCourses] = useState([]);
 
+  const router = useHistory();
   useEffect(() => {
     const getInstCourses = async () => {
       const { data } = await axios.get(
@@ -19,7 +20,7 @@ const IClasses = () => {
   }, []);
 
   const showStudents = async (code) => {
-    window.location = `/instructor-students/${code}`;
+    router.push(`/instructor-students/${code}`);
   };
 
   return (

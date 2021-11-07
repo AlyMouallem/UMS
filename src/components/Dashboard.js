@@ -14,9 +14,9 @@ const Dashboard = () => {
       <>
         {role === "Student" ? (
           <>
-            {courses.length > 0 ? (
+            {courses && courses.length > 0 ? (
               <>
-                {coursesWM.length > 0 ? (
+                {coursesWM && coursesWM.length > 0 ? (
                   <>
                     <h4>
                       You have registered {courses.length} courses .{" "}
@@ -25,9 +25,7 @@ const Dashboard = () => {
                     </h4>
                     <h4>
                       You can check detailed marks{" "}
-                      <Link to={`/students-classes/${name}`}>
-                        <span style={{ color: "red" }}>Here</span>
-                      </Link>{" "}
+                      <Link to={`/students-classes/${name}`}>Here</Link>{" "}
                     </h4>
 
                     <BarChart courses={coursesWM} />
@@ -42,9 +40,7 @@ const Dashboard = () => {
             ) : (
               <h4>
                 You have not registered any course yet. Please register{" "}
-                <Link to="/register-courses">
-                  <span style={{ color: "red" }}>Here</span>
-                </Link>
+                <Link to="/register-courses">Here</Link>
               </h4>
             )}
           </>
@@ -52,7 +48,7 @@ const Dashboard = () => {
           <>
             {role === "Instructor" && (
               <>
-                {coursesWM.length > 0 ? (
+                {coursesWM && coursesWM.length > 0 ? (
                   <InstructorDashboard maxPC={maxMin} courses={coursesWM} />
                 ) : (
                   <h4>You have no student marks published.</h4>

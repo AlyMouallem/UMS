@@ -12,7 +12,7 @@ const AddMajor = () => {
     });
 
     toast.success(data.message);
-    setTimeout(3000, setName(""));
+    setTimeout(1000, setName(""));
   };
   return (
     <>

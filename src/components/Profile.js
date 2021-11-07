@@ -55,7 +55,6 @@ const Profile = () => {
         window.localStorage.removeItem(key);
         return true;
       });
-      toast.success("account deleted");
       window.location = "/";
       setState(null);
     } catch (error) {

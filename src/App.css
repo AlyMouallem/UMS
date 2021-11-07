@@ -33,16 +33,10 @@ h1 {
 }
 
 .chart {
-  /* display: flex;
-  justify-content: center;
-  align-content: center;
-  align-self: center;
-  margin-top: 5px;
-  flex-direction: row;
-  padding: 5px; */
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  justify-content: space-evenly;
   height: 80vh;
   width: 90vw;
 }

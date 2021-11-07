@@ -5,7 +5,7 @@ import { Modal } from "antd";
 import { toast } from "react-toastify";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 
-const Students = () => {
+const Students = (props) => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
   const { name, role } = user;
@@ -37,8 +37,7 @@ const Students = () => {
             final.mark * final.percentage) /
           100
         ).toFixed(2);
-  const index = window.location.pathname.lastIndexOf("/");
-  const code = window.location.pathname.slice(index + 1);
+  const code = props.match.params.code;
 
   useEffect(() => {
     const getInstCourses = async () => {
@@ -49,7 +48,6 @@ const Students = () => {
             )
           : role === "Dean" &&
             (await axios.get(`http://localhost:8000/api/code-classes/${code}`));
-
       setCourses(
         data.map(({ course, student }) => ({
           ...course,
@@ -186,7 +184,7 @@ const Students = () => {
                       }
                     >
                       <>
-                        <Table className="Table">
+                        <Table className="table">
                           <Thead>
                             <Tr>
                               <Th>#</Th>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router";
 import { Menu } from "antd";
 import { IoIosPeople } from "react-icons/io";
 import { BsBook } from "react-icons/bs";
@@ -12,10 +13,10 @@ import {
   LogoutOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-
 const Navbar = () => {
   const { Item, SubMenu } = Menu;
   const [state, setState] = useState([]);
+  const router = useHistory();
 
   useEffect(() => {
     getState();
@@ -26,7 +27,7 @@ const Navbar = () => {
   const logout = () => {
     window.localStorage.removeItem("auth");
     setState([]);
-    window.location = "/";
+    router.push("/");
   };
   return (
     <>
@@ -34,7 +35,7 @@ const Navbar = () => {
         <>
           <Menu mode="horizontal">
             <Item key={110} icon={<AiOutlineHome size="1.3rem" />}>
-              <Link to="/dashboard">Dashboard</Link>
+              <NavLink to="/dashboard">Dashboard</NavLink>
             </Item>
 
             {state &&
@@ -43,12 +44,12 @@ const Navbar = () => {
               state.user.role === "Student" && (
                 <>
                   <Item key={10} icon={<AiOutlineHome />}>
-                    <Link to={`/students-classes/${state.user.name}`}>
+                    <NavLink to={`/students-classes/${state.user.name}`}>
                       My Classes
-                    </Link>
+                    </NavLink>
                   </Item>
                   <Item key={20} icon={<PlusOutlined />}>
-                    <Link to="/register-courses">Register Courses</Link>
+                    <NavLink to="/register-courses">Register Courses</NavLink>
                   </Item>
                 </>
               )}
@@ -63,10 +64,10 @@ const Navbar = () => {
                     icon={<IoIosPeople size="1.7rem" />}
                   >
                     <Item key={101}>
-                      <Link to="/list-students">Students</Link>
+                      <NavLink to="/list-students">Students</NavLink>
                     </Item>
                     <Item key={201}>
-                      <Link to="/list-instructors">Instructors</Link>
+                      <NavLink to="/list-instructors">Instructors</NavLink>
                     </Item>
                   </SubMenu>
 
@@ -76,16 +77,16 @@ const Navbar = () => {
                     icon={<BsBook size="1.3rem" />}
                   >
                     <Item key={320}>
-                      <Link to="/list-courses"> List Courses</Link>
+                      <NavLink to="/list-courses"> List Courses</NavLink>
                     </Item>
                     <Item key={310}>
-                      <Link to="/add-course"> Add Course</Link>
+                      <NavLink to="/add-course"> Add Course</NavLink>
                     </Item>
                     <Item key={420}>
-                      <Link to="/list-majors"> List Majors</Link>
+                      <NavLink to="/list-majors"> List Majors</NavLink>
                     </Item>
                     <Item key={410}>
-                      <Link to="/add-major"> Add Major</Link>
+                      <NavLink to="/add-major"> Add Major</NavLink>
                     </Item>
                   </SubMenu>
                 </>
@@ -96,7 +97,7 @@ const Navbar = () => {
               state.user.role === "Instructor" && (
                 <>
                   <Item key={244} icon={<SiGoogleclassroom size="1.6rem" />}>
-                    <Link to="/instructor-classes">My Classes</Link>
+                    <NavLink to="/instructor-classes">My Classes</NavLink>
                   </Item>
                 </>
               )}
@@ -107,7 +108,7 @@ const Navbar = () => {
               title={state && state.user && state.user.name}
             >
               <Item key={5} icon={<UserOutlined />}>
-                <Link to="/profile">Profile</Link>
+                <NavLink to="/profile">Profile</NavLink>
               </Item>
               <Item key={6} icon={<LogoutOutlined />}>
                 <a href="/" onClick={logout}>
@@ -120,13 +121,13 @@ const Navbar = () => {
       ) : (
         <Menu mode="horizontal">
           <Item key={1} icon={<AiOutlineHome />}>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </Item>
           <Item key={2} icon={<LoginOutlined />}>
-            <Link to="/login">Login</Link>
+            <NavLink to="/login">Login</NavLink>
           </Item>
           <Item key={3} icon={<UserAddOutlined />}>
-            <Link to="/register">Register</Link>
+            <NavLink to="/register">Register</NavLink>
           </Item>
         </Menu>
       )}

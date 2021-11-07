@@ -19,11 +19,12 @@ const Navbar = () => {
   const router = useHistory();
 
   useEffect(() => {
+    const getState = () => {
+      setState(JSON.parse(window.localStorage.getItem("auth")));
+    };
     getState();
   }, []);
-  const getState = () => {
-    setState(JSON.parse(window.localStorage.getItem("auth")));
-  };
+
   const logout = () => {
     window.localStorage.removeItem("auth");
     setState([]);
@@ -34,8 +35,10 @@ const Navbar = () => {
       {state && state.user && state.user.name && state !== null ? (
         <>
           <Menu mode="horizontal">
-            <Item key={110} icon={<AiOutlineHome size="1.3rem" />}>
-              <NavLink to="/dashboard">Dashboard</NavLink>
+            <Item key={110} icon={<UserOutlined />}>
+              <NavLink to="/dashboard">
+                {state && state.user && state.user.name}
+              </NavLink>
             </Item>
 
             {state &&
@@ -43,7 +46,7 @@ const Navbar = () => {
               state.user.role &&
               state.user.role === "Student" && (
                 <>
-                  <Item key={10} icon={<AiOutlineHome />}>
+                  <Item key={10} icon={<SiGoogleclassroom size="1.6rem" />}>
                     <NavLink to={`/students-classes/${state.user.name}`}>
                       My Classes
                     </NavLink>
@@ -102,20 +105,15 @@ const Navbar = () => {
                 </>
               )}
 
-            <SubMenu
-              key={100}
+            <Item
               style={{ marginLeft: "auto" }}
-              title={state && state.user && state.user.name}
+              key={6}
+              icon={<LogoutOutlined />}
             >
-              <Item key={5} icon={<UserOutlined />}>
-                <NavLink to="/profile">Profile</NavLink>
-              </Item>
-              <Item key={6} icon={<LogoutOutlined />}>
-                <a href="/" onClick={logout}>
-                  Logout
-                </a>
-              </Item>
-            </SubMenu>
+              <NavLink to="/" onClick={logout}>
+                Logout
+              </NavLink>
+            </Item>
           </Menu>
         </>
       ) : (

@@ -4,6 +4,11 @@
 h1 {
   text-align: center;
 }
+h3 {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+}
 
 .square {
   border-radius: 0px;
@@ -33,6 +38,7 @@ h1 {
 }
 
 .chart {
+  margin: 20px;
   display: flex;
   flex-wrap: wrap;
   position: relative;

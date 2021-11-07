@@ -26,15 +26,11 @@ const Profile = () => {
 
   const handleChange = async () => {
     try {
-      const { data } = await axios.put(
-        `http://localhost:8000/api/users/${_id}`,
-        {
-          name: nameE,
-          email: emailE,
-        }
-      );
+      const { data } = await axios.put(`/api/users/${_id}`, {
+        name: nameE,
+        email: emailE,
+      });
       const { token, user } = data;
-      console.log({ token, user });
 
       toast.success(data.message);
       window.localStorage.setItem("auth", JSON.stringify({ token, user }));
@@ -45,9 +41,7 @@ const Profile = () => {
 
   const handleDelete = async () => {
     try {
-      const result = await axios.delete(
-        `http://localhost:8000/api/users/${_id}`
-      );
+      const result = await axios.delete(`/api/users/${_id}`);
       console.log(result);
 
       const keysToRemove = ["auth", "courses", "registered"];
@@ -58,7 +52,7 @@ const Profile = () => {
       window.location = "/";
       setState(null);
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
   return (

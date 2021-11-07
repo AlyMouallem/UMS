@@ -12,7 +12,7 @@ const IClasses = () => {
   useEffect(() => {
     const getInstCourses = async () => {
       const { data } = await axios.get(
-        `http://localhost:8000/api/courses/instructor/${state.user.name}`
+        `/api/courses/instructor/${state.user.name}`
       );
       setCourses(data);
     };

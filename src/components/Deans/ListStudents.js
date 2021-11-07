@@ -9,7 +9,7 @@ const ListStudents = () => {
   const router = useHistory();
   useEffect(() => {
     const getInstructors = async () => {
-      const { data } = await axios.get(`http://localhost:8000/api/students`);
+      const { data } = await axios.get(`/api/students`);
       setStudent(data);
     };
     getInstructors();

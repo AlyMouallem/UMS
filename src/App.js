@@ -7,8 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/antd.css";
 import Navbar from "./Navbar";
 import { ToastContainer } from "react-toastify";
-
+import axios from "axios";
 function App() {
+  axios.defaults.baseURL = "http://localhost:8000";
   return (
     <Router>
       <Navbar />

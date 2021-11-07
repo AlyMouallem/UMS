@@ -18,9 +18,7 @@ const RegisterCourses = () => {
   useEffect(() => {
     const getCourses = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:8000/api/classes/${name}/No/`
-        );
+        const { data } = await axios.get(`/api/classes/${name}/No/`);
         await getRegistered();
         setCourses(data.map(({ course }) => course));
       } catch (err) {
@@ -32,9 +30,7 @@ const RegisterCourses = () => {
 
   const getRegistered = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/classes/${name}/Yes/`
-      );
+      const { data } = await axios.get(`/api/classes/${name}/Yes/`);
       setCredits(data.length * 3);
     } catch (err) {
       toast.error("Error. Try again later.");
@@ -77,12 +73,9 @@ const RegisterCourses = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.put(
-        `http://localhost:8000/api/classes/${name}/Yes`,
-        {
-          registered: registered.map(({ code }) => code),
-        }
-      );
+      const { data } = await axios.put(`/api/classes/${name}/Yes`, {
+        registered: registered.map(({ code }) => code),
+      });
 
       toast.success(data.message);
 

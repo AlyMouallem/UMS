@@ -80,10 +80,10 @@ const InstructorDashboard = ({ maxPC }) => {
 
   return (
     <>
-      <h4>
-        Below is a representation of your classes' averages. To see detailed
-        info about a specific class, click on the class code.
-      </h4>
+      <h3>Below is a representation of your classes' averages.</h3>
+      <h3>
+        To see detailed info about a specific class, click on the class code.
+      </h3>
       <div className="chart">
         <>
           <GetBars />

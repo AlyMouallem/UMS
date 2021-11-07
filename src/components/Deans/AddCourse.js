@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
+
 const AddCourses = () => {
   const [majors, setMajors] = useState([]);
   const [instructors, setInstructors] = useState([]);
@@ -48,7 +49,7 @@ const AddCourses = () => {
   }, [state]);
   const getMajors = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/majors");
+      const { data } = await axios.get("/api/majors");
 
       setMajors(data.map((data) => data.name));
     } catch (err) {
@@ -57,7 +58,7 @@ const AddCourses = () => {
   };
   const getInstructors = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/instructors");
+      const { data } = await axios.get("/api/instructors");
       setInstructors(data);
     } catch (err) {
       toast.error("Error. Try again later.");
@@ -72,7 +73,7 @@ const AddCourses = () => {
       );
     } else {
       try {
-        const { data } = await axios.post("http://localhost:8000/api/courses", {
+        const { data } = await axios.post("/api/courses", {
           cstate,
           grades: grades,
         });

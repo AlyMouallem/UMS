@@ -27,7 +27,7 @@ const DeanDashboard = ({ maxPC }) => {
               <Bar
                 key={i + 1 + i * i}
                 width="400"
-                height="400"
+                height="350"
                 data={{
                   labels: student[i],
                   datasets: [
@@ -79,7 +79,8 @@ const DeanDashboard = ({ maxPC }) => {
 
   return (
     <>
-      <h4>Below is a representation of top 5 students in all classes.</h4>
+      <h1>Below is a representation of all classes' marks.</h1>
+
       <div className="chart">
         <>
           <GetBars />

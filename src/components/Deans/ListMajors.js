@@ -10,7 +10,7 @@ const ListMajors = () => {
   }, []);
 
   const getMajors = async () => {
-    const { data } = await axios.get(`http://localhost:8000/api/majors`);
+    const { data } = await axios.get(`/api/majors`);
     setMajors(
       data.map(({ name }) => ({
         name,
@@ -20,9 +20,7 @@ const ListMajors = () => {
 
   const handleDelete = async (name) => {
     try {
-      const { data } = await axios.delete(
-        `http://localhost:8000/api/majors/${name}`
-      );
+      const { data } = await axios.delete(`/api/majors/${name}`);
       toast.success(data.message);
 
       setMajors(majors.filter((major) => major.name !== name));

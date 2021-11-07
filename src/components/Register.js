@@ -10,7 +10,7 @@ const Register = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const [first_name, setFirstName] = useState("Ali");
   const [last_name, setLastName] = useState("Mouallem");
-  const [email, setEmail] = useState("ali@gmail.com");
+  const [email, setEmail] = useState("ali2@gmail.com");
   const [password, setPassword] = useState("batata");
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const Register = () => {
   useEffect(() => {
     const getMajors = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8000/api/majors");
+        const { data } = await axios.get("/api/majors");
 
         setMajors(
           ...majors,
@@ -40,7 +40,7 @@ const Register = () => {
     setLoading(true);
     if (!instructor) {
       try {
-        const response = await axios.post("http://localhost:8000/api/users", {
+        const response = await axios.post("/api/users", {
           first_name,
           last_name,
           email,
@@ -63,7 +63,7 @@ const Register = () => {
       }
     } else {
       try {
-        const response = await axios.post("http://localhost:8000/api/users", {
+        const response = await axios.post("/api/users", {
           first_name,
           last_name,
           email,

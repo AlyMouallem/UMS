@@ -24,9 +24,7 @@ const Classes = (props) => {
   useEffect(() => {
     const getMyCourses = async () => {
       const name2search = role === "Student" ? name : dName;
-      const { data } = await axios.get(
-        `http://localhost:8000/api/classes/${name2search}/Yes`
-      );
+      const { data } = await axios.get(`/api/classes/${name2search}/Yes`);
       setCourses(data.map(({ course }) => course));
     };
     state && getMyCourses();

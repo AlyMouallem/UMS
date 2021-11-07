@@ -12,9 +12,7 @@ const ListInstructors = () => {
 
   useEffect(() => {
     const getInstructors = async () => {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/instructors/`
-      );
+      const { data } = await axios.get(`/api/instructors/`);
       setInstructors(data);
     };
     getInstructors();
@@ -23,9 +21,7 @@ const ListInstructors = () => {
   const showCourses = async (name) => {
     setOk(true);
     setInstructorName(name);
-    const { data } = await axios.get(
-      `http://localhost:8000/api/courses/instructor/${name}`
-    );
+    const { data } = await axios.get(`/api/courses/instructor/${name}`);
     setCourses(data);
   };
   return (

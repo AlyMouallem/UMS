@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AppstoreFilled } from "@ant-design/icons";
+import { useHistory } from "react-router";
 import { Modal } from "antd";
 import { toast } from "react-toastify";
-import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
-
+import TableC from "../forms/ClassesTable";
+import GradesTable from "../forms/GradesTable";
+import { SyncOutlined } from "@ant-design/icons";
 const Students = (props) => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
@@ -38,6 +39,7 @@ const Students = (props) => {
           100
         ).toFixed(2);
   const code = props.match.params.code;
+  const router = useHistory();
 
   useEffect(() => {
     const getInstCourses = async () => {
@@ -56,7 +58,8 @@ const Students = (props) => {
       );
     };
     getInstCourses();
-  }, []);
+    console.log("object");
+  }, [state.user.name, code, role]);
 
   const showGrades = async (grades, student, code) => {
     setOk(true);
@@ -74,6 +77,7 @@ const Students = (props) => {
 
       setOk(false);
       toast.success(data.message);
+      router.go(0);
     } catch (err) {
       toast.error(err);
     }
@@ -93,62 +97,7 @@ const Students = (props) => {
               <div className="container">
                 <div className="row ">
                   <div className="py-3">
-                    <Table className="table">
-                      <Thead>
-                        <Tr>
-                          <Th>#</Th>
-                          <Th>Course Code</Th>
-                          <Th>Course Name</Th>
-                          <Th>Credits</Th>
-                          <Th>Student</Th>
-                          <Th>Major</Th>
-                          <Th>Grades</Th>
-                          <Th>Time</Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {courses.map(
-                          (
-                            {
-                              code,
-                              name,
-                              time,
-                              credits,
-                              student,
-                              major,
-                              grades,
-                            },
-                            index
-                          ) => {
-                            return (
-                              <Tr key={index}>
-                                <Th>{index + 1}</Th>
-                                <Td>{code}</Td>
-                                <Td>{name}</Td>
-                                <Td>{credits}</Td>
-                                <Td>{student}</Td>
-                                <Td>{major}</Td>
-
-                                <Td>
-                                  {
-                                    <AppstoreFilled
-                                      onClick={() =>
-                                        showGrades(grades, student, code)
-                                      }
-                                      style={{
-                                        fontSize: "24px",
-                                        cursor: "pointer",
-                                      }}
-                                    />
-                                  }
-                                </Td>
-                                <Td>{time}</Td>
-                              </Tr>
-                            );
-                          }
-                        )}
-                      </Tbody>
-                    </Table>
+                    <TableC courses={courses} showGradesInst={showGrades} />
                   </div>
                 </div>
                 <div className="row">
@@ -184,161 +133,12 @@ const Students = (props) => {
                       }
                     >
                       <>
-                        <Table className="table">
-                          <Thead>
-                            <Tr>
-                              <Th>#</Th>
-                              <Th>Title</Th>
-                              <Th>Percentage/100</Th>
-                              <Th>Grade</Th>
-                              <Th>Total=Grade x Percentage</Th>
-                            </Tr>
-                          </Thead>
-                          <Tbody>
-                            <Tr>
-                              <Td>1</Td>
-                              <Td>Attendance</Td>
-                              <Td>{attendance.percentage}%</Td>
-                              {!edit ? (
-                                <Td>{attendance.mark}</Td>
-                              ) : (
-                                <Td>
-                                  <input
-                                    onChange={(e) =>
-                                      setGrade({
-                                        ...grade,
-                                        attendance: {
-                                          ...attendance,
-                                          mark: e.target.value,
-                                        },
-                                      })
-                                    }
-                                    value={attendance.mark}
-                                    type="number"
-                                    min={0}
-                                    max={100}
-                                    className="form-control form-control-sm"
-                                  ></input>{" "}
-                                </Td>
-                              )}
-
-                              <Td>
-                                {(
-                                  (attendance.mark * attendance.percentage) /
-                                  100
-                                ).toFixed(2)}
-                              </Td>
-                            </Tr>
-                            <Tr>
-                              <Td>2</Td>
-                              <Td>Midterm</Td>
-                              <Td>{midterm.percentage}%</Td>
-                              {!edit ? (
-                                <Td>{midterm.mark}</Td>
-                              ) : (
-                                <Td>
-                                  <input
-                                    className="form-control form-control-sm"
-                                    onChange={(e) =>
-                                      setGrade({
-                                        ...grade,
-                                        midterm: {
-                                          ...midterm,
-                                          mark: e.target.value,
-                                        },
-                                      })
-                                    }
-                                    value={midterm.mark}
-                                    type="number"
-                                    min={0}
-                                    max={100}
-                                  ></input>
-                                </Td>
-                              )}
-
-                              <Td>
-                                {(
-                                  (midterm.mark * midterm.percentage) /
-                                  100
-                                ).toFixed(2)}
-                              </Td>
-                            </Tr>
-                            <Tr>
-                              <Td>3</Td>
-                              <Td>Project</Td>
-                              <Td>{project.percentage}%</Td>
-                              {!edit ? (
-                                <Td>{project.mark}</Td>
-                              ) : (
-                                <Td>
-                                  <input
-                                    className="form-control form-control-sm"
-                                    onChange={(e) =>
-                                      setGrade({
-                                        ...grade,
-                                        project: {
-                                          ...project,
-                                          mark: e.target.value,
-                                        },
-                                      })
-                                    }
-                                    value={project.mark}
-                                    type="number"
-                                    min={0}
-                                    max={100}
-                                  ></input>{" "}
-                                </Td>
-                              )}
-
-                              <Td>
-                                {(
-                                  (project.mark * project.percentage) /
-                                  100
-                                ).toFixed(2)}
-                              </Td>
-                            </Tr>
-                            <Tr>
-                              <Td>4</Td>
-                              <Td>Final</Td>
-                              <Td>{final.percentage}%</Td>
-                              {!edit ? (
-                                <Td>{final.mark}</Td>
-                              ) : (
-                                <Td>
-                                  <input
-                                    className="form-control form-control-sm"
-                                    onChange={(e) =>
-                                      setGrade({
-                                        ...grade,
-                                        final: {
-                                          ...final,
-                                          mark: e.target.value,
-                                        },
-                                      })
-                                    }
-                                    value={final.mark}
-                                    type="number"
-                                    min={0}
-                                    max={100}
-                                  ></input>
-                                </Td>
-                              )}
-                              <Td>
-                                {(
-                                  (final.mark * final.percentage) /
-                                  100
-                                ).toFixed(2)}
-                              </Td>
-                            </Tr>
-                            <Tr>
-                              <Td>5</Td>
-                              <Td>Average</Td>
-                              <Td colSpan="2">100%</Td>
-
-                              <Td>{total}</Td>
-                            </Tr>
-                          </Tbody>
-                        </Table>
+                        <GradesTable
+                          grade={grade}
+                          setGrade={setGrade}
+                          total={total}
+                          edit={edit}
+                        />
                       </>
                     </Modal>
                   </div>
@@ -346,7 +146,11 @@ const Students = (props) => {
               </div>
             </>
           ) : (
-            <h1>You don't have any student</h1>
+            courses.length === 0 && (
+              <>
+                <SyncOutlined className="spinner" />
+              </>
+            )
           )}
         </>
       )}

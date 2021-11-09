@@ -9,8 +9,8 @@ import Navbar from "./Navbar";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
 function App() {
-  // axios.defaults.baseURL = "http://localhost:8000";
-  axios.defaults.baseURL = "https://myuniversitymu.herokuapp.com/";
+  axios.defaults.baseURL = "http://localhost:8000";
+  // axios.defaults.baseURL = "https://myuniversitymu.herokuapp.com/";
   return (
     <Router>
       <Navbar />

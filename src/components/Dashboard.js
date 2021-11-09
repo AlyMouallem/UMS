@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import BarChart from "./chart/BarChart";
-import InstructorDashboard from "./Instructors/InstructorDashboard";
-import DeanDashboard from "./Deans/DeanDashboard";
+import IDDashboard from "./chart/IDDashboard";
 const Dashboard = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
 
@@ -10,7 +9,7 @@ const Dashboard = () => {
   const { role, name } = user;
 
   return (
-    <>
+    <div className="dashboard">
       {role === "Student" ? (
         <>
           {courses && courses.length > 0 ? (
@@ -48,9 +47,16 @@ const Dashboard = () => {
           {role === "Instructor" && (
             <>
               {coursesWM && coursesWM.length > 0 ? (
-                <InstructorDashboard maxPC={maxMin} courses={coursesWM} />
+                <>
+                  <h4>Below is a representation of your classes' averages.</h4>
+                  <h4>
+                    To see detailed info about a specific class, click on the
+                    class code.
+                  </h4>
+                  <IDDashboard maxPC={maxMin} />
+                </>
               ) : (
-                <h4>You have no student marks published.</h4>
+                <h1>You have no student marks published.</h1>
               )}
             </>
           )}
@@ -58,10 +64,15 @@ const Dashboard = () => {
       )}
       {role === "Dean" && (
         <>
-          <DeanDashboard maxPC={maxMin} />
+          <h4>Below is a representation of all classes' marks.</h4>
+          <h4>
+            To see detailed info about a specific class, click on the class
+            code.
+          </h4>
+          <IDDashboard dean={true} maxPC={maxMin} />
         </>
       )}
-    </>
+    </div>
   );
 };
 

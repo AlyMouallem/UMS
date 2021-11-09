@@ -2,31 +2,37 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
+import { Modal } from "antd";
 const ListMajors = () => {
   const [majors, setMajors] = useState([]);
+  const [ok, setOk] = useState(false);
+  const [remove, setRemove] = useState("");
 
   useEffect(() => {
+    const getMajors = async () => {
+      const { data } = await axios.get(`/api/majors`);
+      setMajors(
+        data.map(({ name }) => ({
+          name,
+        }))
+      );
+    };
     getMajors();
   }, []);
-
-  const getMajors = async () => {
-    const { data } = await axios.get(`/api/majors`);
-    setMajors(
-      data.map(({ name }) => ({
-        name,
-      }))
-    );
-  };
-
-  const handleDelete = async (name) => {
+  const deleteMajor = async (name) => {
     try {
       const { data } = await axios.delete(`/api/majors/${name}`);
       toast.success(data.message);
-
+      setOk(false);
       setMajors(majors.filter((major) => major.name !== name));
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Error occurred");
     }
+  };
+
+  const handleDelete = (name) => {
+    setOk(true);
+    setRemove(name);
   };
 
   return (
@@ -67,6 +73,17 @@ const ListMajors = () => {
                 </Table>
               </div>
             </div>
+            <Modal
+              title="Confirm delete or cancel?"
+              visible={ok}
+              onCancel={() => setOk(false)}
+              okText="Delete"
+              cancelText="Cancel"
+              okType="primary"
+              onOk={() => deleteMajor(remove)}
+            >
+              <strong> {`Do you want to delete ${remove} major?`}</strong>{" "}
+            </Modal>
           </div>
         </>
       )}

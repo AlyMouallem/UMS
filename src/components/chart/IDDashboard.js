@@ -1,21 +1,25 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import GaugeChart from "react-gauge-chart/dist";
-
-const DeanDashboard = ({ maxPC }) => {
+import { Link } from "react-router-dom";
+const IDDashboard = ({ maxPC, dean }) => {
   const length = maxPC.length;
-
   const code = [];
   const student = [];
   const mark = [];
   const average = [];
   const instructor = [];
+
   for (let i = 0; i < maxPC.length; i++) {
     code[i] = maxPC[i].map(({ code }) => code);
     student[i] = maxPC[i].map(({ student }) => student);
     mark[i] = maxPC[i].map(({ grade }) => grade);
-    instructor[i] = maxPC[i].map(({ instructor }) => instructor);
     average[i] = mark[i].reduce((a, b) => a + b) / mark[i].length;
+    if (dean) {
+      instructor[i] = maxPC[i].map(({ instructor }) => instructor);
+    } else {
+      instructor[i] = ["", ""];
+    }
   }
 
   const GetBars = () => {
@@ -23,16 +27,19 @@ const DeanDashboard = ({ maxPC }) => {
       <>
         {[...Array(length)].map((x, i) => (
           <>
-            <div>
+            <div key={i + 1 * Math.random() * 1000}>
+              <Link to={`instructor-students/${code[i][0]}`}>
+                <h1> {code[i][0]}</h1>
+              </Link>
               <Bar
-                key={i + 1 + i * i}
+                key={i + 1 * Math.random() * 1000}
                 width="400"
                 height="350"
                 data={{
                   labels: student[i],
                   datasets: [
                     {
-                      label: `${instructor[i][0]}'s ${code[i][0]}  `,
+                      label: `${instructor[i][0]} ${code[i][0]} `,
                       data: mark[i],
                       backgroundColor: function (context) {
                         const index = context.dataIndex;
@@ -61,7 +68,7 @@ const DeanDashboard = ({ maxPC }) => {
                 }}
               />
               <GaugeChart
-                key={i * i}
+                key={i + 1 * i}
                 id="gauge-chart2"
                 nrOfLevels={20}
                 colors={["red", "green"]}
@@ -79,8 +86,6 @@ const DeanDashboard = ({ maxPC }) => {
 
   return (
     <>
-      <h1>Below is a representation of all classes' marks.</h1>
-
       <div className="chart">
         <>
           <GetBars />
@@ -90,4 +95,4 @@ const DeanDashboard = ({ maxPC }) => {
   );
 };
 
-export default DeanDashboard;
+export default IDDashboard;

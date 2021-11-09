@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { AppstoreFilled } from "@ant-design/icons";
 import { Modal } from "antd";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import Faculty from "../forms/Faculty";
 
 const ListInstructors = () => {
   const [instructors, setInstructors] = useState([]);
@@ -33,43 +33,7 @@ const ListInstructors = () => {
               <div className="col-3"></div>
               <div>
                 <h1>Below are all the instructors</h1>
-                <Table className="table">
-                  <Thead>
-                    <Tr>
-                      <Th>#</Th>
-                      <Th>Name</Th>
-                      <Th>Email</Th>
-                      <Th>Courses</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {instructors.map(
-                      ({ first_name, last_name, email }, index) => {
-                        return (
-                          <Tr key={index}>
-                            <Th>{index + 1}</Th>
-                            <Td>{`${first_name} ${last_name}`}</Td>
-                            <Td>{email}</Td>
-
-                            <Td>
-                              {
-                                <AppstoreFilled
-                                  onClick={() =>
-                                    showCourses(`${first_name} ${last_name}`)
-                                  }
-                                  style={{
-                                    fontSize: "24px",
-                                    cursor: "pointer",
-                                  }}
-                                />
-                              }
-                            </Td>
-                          </Tr>
-                        );
-                      }
-                    )}
-                  </Tbody>
-                </Table>
+                <Faculty people={instructors} showCourses={showCourses} />
               </div>
               <Modal
                 title={`Here is a list of ${instructorName}'s courses`}

@@ -22,7 +22,7 @@ const Profile = () => {
       };
     };
     setAuth();
-  }, []);
+  }, [token]);
 
   const handleChange = async () => {
     try {

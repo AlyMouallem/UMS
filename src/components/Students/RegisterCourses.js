@@ -100,6 +100,7 @@ const RegisterCourses = () => {
                 <Table className="table">
                   <Thead>
                     <Tr>
+                      <Th>#</Th>
                       <Th>Course Code</Th>
                       <Th>Course Name</Th>
                       <Th>Instructor</Th>
@@ -113,6 +114,7 @@ const RegisterCourses = () => {
                       ({ code, name, instructor, time, credits }, index) => {
                         return (
                           <Tr key={index}>
+                            <Td>{index + 1}</Td>
                             <Td>{code}</Td>
                             <Td>{name}</Td>
                             <Td>{instructor}</Td>

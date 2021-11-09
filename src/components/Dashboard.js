@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import BarChart from "./chart/BarChart";
+import StudentDashboard from "./chart/StudentDashboard";
 import IDDashboard from "./chart/IDDashboard";
 const Dashboard = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
@@ -26,7 +26,7 @@ const Dashboard = () => {
                     <Link to={`/students-classes/${name}`}>Here</Link>{" "}
                   </h4>
 
-                  <BarChart courses={coursesWM} />
+                  <StudentDashboard courses={coursesWM} />
                 </>
               ) : (
                 <h1>
@@ -46,13 +46,10 @@ const Dashboard = () => {
         <>
           {role === "Instructor" && (
             <>
-              {coursesWM && coursesWM.length > 0 ? (
+              {maxMin && maxMin.length > 0 ? (
                 <>
                   <h4>Below is a representation of your classes' averages.</h4>
-                  <h4>
-                    To see detailed info about a specific class, click on the
-                    class code.
-                  </h4>
+
                   <IDDashboard maxPC={maxMin} />
                 </>
               ) : (
@@ -65,10 +62,7 @@ const Dashboard = () => {
       {role === "Dean" && (
         <>
           <h4>Below is a representation of all classes' marks.</h4>
-          <h4>
-            To see detailed info about a specific class, click on the class
-            code.
-          </h4>
+
           <IDDashboard dean={true} maxPC={maxMin} />
         </>
       )}

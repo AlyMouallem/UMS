@@ -2,6 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import GaugeChart from "react-gauge-chart/dist";
 import { Link } from "react-router-dom";
+import Filter from "./../forms/Filter";
 const IDDashboard = ({ maxPC, dean }) => {
   const length = maxPC.length;
   const code = [];
@@ -21,20 +22,23 @@ const IDDashboard = ({ maxPC, dean }) => {
       instructor[i] = ["", ""];
     }
   }
+  const codes = [...Array(length)].map((x, i) => {
+    return code[i][0];
+  });
 
   const GetBars = () => {
     return (
       <>
         {[...Array(length)].map((x, i) => (
           <>
-            <div key={i + 1 * Math.random() * 1000}>
+            <div key={i + 3 * Math.random() * 1000}>
               <Link to={`instructor-students/${code[i][0]}`}>
                 <h1> {code[i][0]}</h1>
               </Link>
               <Bar
-                key={i + 1 * Math.random() * 1000}
-                width="400"
-                height="350"
+                key={i + 5 * Math.random() * 12}
+                width="300"
+                height="300"
                 data={{
                   labels: student[i],
                   datasets: [
@@ -68,7 +72,7 @@ const IDDashboard = ({ maxPC, dean }) => {
                 }}
               />
               <GaugeChart
-                key={i + 1 * i}
+                key={(i + 1) * Math.random() * 19}
                 id="gauge-chart2"
                 nrOfLevels={20}
                 colors={["red", "green"]}
@@ -86,10 +90,18 @@ const IDDashboard = ({ maxPC, dean }) => {
 
   return (
     <>
-      <div className="chart">
-        <>
-          <GetBars />
-        </>
+      <h4>
+        To see detailed info about a specific class, click on the class code.
+      </h4>
+      <div className="row">
+        {/* <div className="col-3">
+          <Filter items={codes} />
+        </div> */}
+        <div className="col-6">
+          <div key={Math.random() * 1948} className="chart">
+            <GetBars />
+          </div>
+        </div>
       </div>
     </>
   );

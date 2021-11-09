@@ -1,6 +1,16 @@
 * {
   margin: 0;
 }
+body {
+  overflow-x: hidden !important;
+}
+.container {
+  max-width: 95% !important;
+  overflow-x: hidden !important;
+}
+.root {
+  width: 90vw;
+}
 h1 {
   text-align: center;
 }
@@ -38,24 +48,17 @@ h3 {
 }
 
 .chart {
-  margin: 20px;
   display: flex;
   flex-wrap: wrap;
   position: relative;
   justify-content: center;
-  height: 80vh;
-  width: 90vw;
+  height: 75vh;
+  width: 80vw;
 }
-/* 
-.chart  > div {
-  margin: 10px 0 0 2%;
-  border: #000;
-  border-style: ridge;
-  width: 35vw;
-  text-align: center;
-} */
+
 .dashboard {
-  padding: 10px 5px;
+  max-width: 100% !important;
+  overflow-x: hidden;
   text-align: center;
 }
 

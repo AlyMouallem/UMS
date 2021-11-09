@@ -9,13 +9,14 @@ import { SyncOutlined } from "@ant-design/icons";
 const Students = (props) => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
-  const { name, role } = user;
+  const { role } = user;
   const [courses, setCourses] = useState([]);
   const [ok, setOk] = useState(false);
   const [edit, setEdit] = useState(false);
   const [student, setStudent] = useState({
     student: "",
     code: "",
+    instructor: "",
   });
   const [grade, setGrade] = useState({
     attendance: { mark: 0, percentage: 0 },
@@ -39,6 +40,7 @@ const Students = (props) => {
           100
         ).toFixed(2);
   const code = props.match.params.code;
+
   const router = useHistory();
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const Students = (props) => {
             )
           : role === "Dean" &&
             (await axios.get(`http://localhost:8000/api/code-classes/${code}`));
-      setCourses(
+      await setCourses(
         data.map(({ course, student }) => ({
           ...course,
           student: `${student.name}`,
@@ -58,20 +60,19 @@ const Students = (props) => {
       );
     };
     getInstCourses();
-    console.log("object");
   }, [state.user.name, code, role]);
 
-  const showGrades = async (grades, student, code) => {
+  const showGrades = async (grades, student, code, instructor) => {
     setOk(true);
     setGrade(grades);
-    setStudent({ student, code });
+    setStudent({ student, code, instructor });
   };
   const submitMarks = async (e) => {
     e.preventDefault();
 
     try {
       const { data } = await axios.put(
-        `http://localhost:8000/api/instructor-classes/${name}/${student.student}/${student.code}`,
+        `http://localhost:8000/api/instructor-classes/${student.instructor}/${student.student}/${student.code}`,
         { ...grade, total: parseFloat(total) }
       );
 
@@ -82,11 +83,12 @@ const Students = (props) => {
       toast.error(err);
     }
   };
+
   return (
     <>
       {state && state.user && state.user.name && (
         <>
-          {courses.length > 0 ? (
+          {courses && courses.length > 0 ? (
             <>
               {role === "Instructor" ? (
                 <h1> Here is a list of your {code} students</h1>

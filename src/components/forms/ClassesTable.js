@@ -48,7 +48,13 @@ const TableC = ({
                             : showGrades
                             ? () => showGrades(code)
                             : showGradesInst
-                            ? () => showGradesInst(grades, student, code)
+                            ? () =>
+                                showGradesInst(
+                                  grades,
+                                  student,
+                                  code,
+                                  instructor
+                                )
                             : ""
                         }
                         style={{

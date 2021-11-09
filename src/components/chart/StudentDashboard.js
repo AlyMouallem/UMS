@@ -2,7 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import GaugeChart from "react-gauge-chart/dist";
 
-const BarChart = ({ courses }) => {
+const StudentDashboard = ({ courses }) => {
   const grades = courses.map(({ grade }) => parseFloat(grade));
   const average =
     grades.reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / grades.length;
@@ -57,34 +57,39 @@ const BarChart = ({ courses }) => {
 
   return (
     <>
-      <div className="chart ">
-        <div style={{ height: 500, width: 400 }}>
-          <Bar height={300} data={data} options={options} />
-          <h2>Total per course</h2>
-        </div>
-        <div>
-          <GaugeChart
-            id="gauge-chart2"
-            nrOfLevels={20}
-            colors={["red", "green"]}
-            textColor={"black"}
-            percent={average / 100 || 0}
-          />
-          <h2>Total average %</h2>
+      <div className="row">
+        <div className="col-1"></div>
+        <div className="col-8">
+          <div className="chart ">
+            <div style={{ height: 500, width: 400 }}>
+              <Bar height={300} data={data} options={options} />
+              <h2>Total per course</h2>
+            </div>
+            <div>
+              <GaugeChart
+                id="gauge-chart2"
+                nrOfLevels={20}
+                colors={["red", "green"]}
+                textColor={"black"}
+                percent={average / 100 || 0}
+              />
+              <h2>Total average %</h2>
 
-          <GaugeChart
-            id="gauge-chart2"
-            nrOfLevels={4}
-            colors={["red", "green"]}
-            textColor={"black"}
-            formatTextValue={() => calculateGpa(parseFloat(average))}
-            percent={average / 100 || 0}
-          />
-          <h2>GPA /4</h2>
+              <GaugeChart
+                id="gauge-chart2"
+                nrOfLevels={4}
+                colors={["red", "green"]}
+                textColor={"black"}
+                formatTextValue={() => calculateGpa(parseFloat(average))}
+                percent={average / 100 || 0}
+              />
+              <h2>GPA /4</h2>
+            </div>
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default BarChart;
+export default StudentDashboard;

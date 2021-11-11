@@ -9,7 +9,7 @@ const Dashboard = () => {
   const { role, name } = user;
 
   return (
-    <div className="dashboard">
+    <div className="container">
       {role === "Student" ? (
         <>
           {courses && courses.length > 0 ? (
@@ -17,7 +17,7 @@ const Dashboard = () => {
               {coursesWM && coursesWM.length > 0 ? (
                 <>
                   <h4>
-                    You have registered {courses.length} courses .{" "}
+                    You have registered {courses.length} courses,{" "}
                     {coursesWM.length} courses have their marks published. Below
                     is an overview of your marks.
                   </h4>

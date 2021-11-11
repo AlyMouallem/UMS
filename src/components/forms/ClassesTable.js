@@ -18,6 +18,7 @@ const TableC = ({
             <Th>Course Name</Th>
             {showGradesInst && <Th>Student</Th>}
             <Th>{showGrades || dean ? "Instructor" : "Major"}</Th>
+            {dean && <Th> Major</Th>}
             <Th>Time</Th>
             <Th>Credits</Th>
             <Th>{showGrades || showGradesInst ? "Grades" : "View Students"}</Th>
@@ -37,6 +38,7 @@ const TableC = ({
                   <Td>{name}</Td>
                   {showGradesInst && <Td>{student}</Td>}
                   <Td>{showGrades || dean ? instructor : major}</Td>
+                  {dean && <Td> {major}</Td>}
                   <Td>{time}</Td>
                   <Td>{credits}</Td>
                   <Td>

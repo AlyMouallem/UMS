@@ -3,12 +3,18 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import TableC from "../forms/ClassesTable";
 import Filter from "../forms/Filter";
+import Pagination from "../forms/Pagination";
+import { paginate } from "../../utils/paginate";
+import _ from "lodash";
 const IClasses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const [courses, setCourses] = useState([]);
   const [codes, setCodes] = useState([]);
-  const [filter, setFilter] = useState([courses]);
+  const [filter, setFilter] = useState([]);
   const router = useHistory();
+  // const [pageSize, setPageSize] = useState(3);
+  // const [currentPage, setCurrentPage] = useState(2);
+  // const [sortColumn, setSortColumn] = useState({ path: "", order: "asc" });
   useEffect(() => {
     const getInstCourses = async () => {
       const { data } = await axios.get(
@@ -31,7 +37,19 @@ const IClasses = () => {
       setFilter(courses);
     }
   };
-
+  // const handleSort = (path) => {
+  //   setSortColumn({ ...sortColumn, path });
+  //   console.log(path);
+  //   sortColumn.order === "asc"
+  //     ? setSortColumn({ path, order: "desc" })
+  //     : setSortColumn({ path, order: "asc" });
+  // };
+  // const handlePageChange = (page) => {
+  //   setCurrentPage(page);
+  // };
+  // const classes = paginate(courses, currentPage, pageSize);
+  // const sorted = _.orderBy(classes, [sortColumn.path], [sortColumn.order]);
+  // const result = paginate(sorted, currentPage, pageSize);
   return (
     <>
       {state && state.user && state.user.name && (
@@ -40,15 +58,23 @@ const IClasses = () => {
             <>
               <h1> Here is a list of your Classes</h1>
 
-              <div className="container">
-                <div className="row ">
-                  <div className="col col-sm-2 py-4">
-                    <Filter items={codes} handleClick={handleClick} />
-                  </div>
+              <div className="row">
+                <div className="col-md-2 col-sm-2 ">
+                  <Filter items={codes} handleClick={handleClick} />
+                </div>
+                <div className="col-md-8 col-sm-8">
+                  <TableC
+                    courses={filter}
+                    showStudents={showStudents}
+                    // handleSort={handleSort}
+                  />
 
-                  <div className="col col-sm-8 py-3">
-                    <TableC courses={filter} showStudents={showStudents} />
-                  </div>
+                  {/* <Pagination
+                      itemsCount={courses.length}
+                      pageSize={pageSize}
+                      pageChange={handlePageChange}
+                      currentPage={currentPage}
+                    /> */}
                 </div>
               </div>
             </>

@@ -100,7 +100,7 @@ const IDDashboard = ({ maxPC, dean }) => {
                           labels: student[i],
                           datasets: [
                             {
-                              label: `${instructor[i]} ${code[i]} `,
+                              label: `${instructor[i]}'s ${code[i]} `,
                               data: mark[i],
                               backgroundColor: function (context) {
                                 const index = context.dataIndex;
@@ -145,6 +145,7 @@ const IDDashboard = ({ maxPC, dean }) => {
       </h4>
       <div className="row">
         <div className="col col-sm-2">
+          <h4>Filter by code</h4>
           <Filter items={codes} handleClick={handleClick} />
         </div>
         <div className="col col-sm-6">

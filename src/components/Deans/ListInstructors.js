@@ -36,35 +36,46 @@ const ListInstructors = () => {
                 <Faculty people={instructors} showCourses={showCourses} />
               </div>
               <Modal
-                title={`Here is a list of ${instructorName}'s courses`}
+                title={
+                  courses.length > 0
+                    ? `Here is a list of ${instructorName}'s courses`
+                    : ""
+                }
                 visible={ok}
                 onCancel={() => setOk(false)}
                 onOk={() => setOk(false)}
               >
-                <Table className="table">
-                  <Thead>
-                    <Tr>
-                      <Th>#</Th>
-                      <Td>Major</Td>
-                      <Th>Code</Th>
-                      <Th>Name</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {courses &&
-                      courses.length > 0 &&
-                      courses.map(({ code, name, major }, index) => {
-                        return (
-                          <Tr>
-                            <Th>{index + 1}</Th>
-                            <Td>{major}</Td>
-                            <Td>{code}</Td>
-                            <Td>{name}</Td>
-                          </Tr>
-                        );
-                      })}
-                  </Tbody>
-                </Table>
+                {courses.length === 0 ? (
+                  <h2 style={{ color: "darkred" }}>
+                    {" "}
+                    {instructorName} has no courses
+                  </h2>
+                ) : (
+                  <Table className="table">
+                    <Thead>
+                      <Tr>
+                        <Th>#</Th>
+                        <Td>Major</Td>
+                        <Th>Code</Th>
+                        <Th>Name</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {courses &&
+                        courses.length > 0 &&
+                        courses.map(({ code, name, major }, index) => {
+                          return (
+                            <Tr>
+                              <Th>{index + 1}</Th>
+                              <Td>{major}</Td>
+                              <Td>{code}</Td>
+                              <Td>{name}</Td>
+                            </Tr>
+                          );
+                        })}
+                    </Tbody>
+                  </Table>
+                )}
               </Modal>
             </div>
           </div>

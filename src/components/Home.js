@@ -9,7 +9,7 @@ const Home = () => {
         <h1 className="jumbotron">My University</h1>
       </div>
 
-      <div className="container py-2">
+      <div className="container">
         <div className="row py-3">
           <div className="col-6 ">
             <h3>About</h3>

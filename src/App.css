@@ -5,11 +5,11 @@ body {
   overflow-x: hidden !important;
 }
 .container {
-  max-width: 99% !important;
-  overflow-x: hidden !important;
+  max-width: 100% !important;
+  /* overflow-x: hidden !important; */
 }
 .root {
-  width: 90vw;
+  width: 100vw;
 }
 h1 {
   text-align: center;

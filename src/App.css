@@ -5,7 +5,7 @@ body {
   overflow-x: hidden !important;
 }
 .container {
-  max-width: 95% !important;
+  max-width: 99% !important;
   overflow-x: hidden !important;
 }
 .root {
@@ -58,7 +58,6 @@ h3 {
 
 .dashboard {
   max-width: 100% !important;
-  overflow-x: hidden;
   text-align: center;
 }
 

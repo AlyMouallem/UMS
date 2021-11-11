@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router";
 import TableC from "../forms/ClassesTable";
+import Filter from "../forms/Filter";
 const IClasses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const [courses, setCourses] = useState([]);
-
+  const [codes, setCodes] = useState([]);
+  const [filter, setFilter] = useState([courses]);
   const router = useHistory();
   useEffect(() => {
     const getInstCourses = async () => {
@@ -13,12 +15,21 @@ const IClasses = () => {
         `/api/courses/instructor/${state.user.name}`
       );
       setCourses(data);
+      setFilter(data);
+      setCodes(data.map(({ code }) => code));
     };
     getInstCourses();
-  }, [state.user.name]);
+  }, []);
 
   const showStudents = async (code) => {
     router.push(`/instructor-students/${code}`);
+  };
+  const handleClick = (item) => {
+    if (item !== "All") {
+      setFilter(courses.filter(({ code }) => code === item));
+    } else {
+      setFilter(courses);
+    }
   };
 
   return (
@@ -31,8 +42,12 @@ const IClasses = () => {
 
               <div className="container">
                 <div className="row ">
-                  <div className="py-3">
-                    <TableC courses={courses} showStudents={showStudents} />
+                  <div className="col col-sm-2 py-4">
+                    <Filter items={codes} handleClick={handleClick} />
+                  </div>
+
+                  <div className="col col-sm-8 py-3">
+                    <TableC courses={filter} showStudents={showStudents} />
                   </div>
                 </div>
               </div>

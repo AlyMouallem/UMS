@@ -49,7 +49,7 @@ const Register = () => {
         });
 
         localStorage.setItem("auth", JSON.stringify(response.data));
-        router.go(0);
+        router.go("/");
         toast.success(response.data.message);
         setLoading(false);
         setFirstName("");
@@ -71,7 +71,7 @@ const Register = () => {
         });
 
         localStorage.setItem("auth", JSON.stringify(response.data));
-        router.go(0);
+        router.go("/");
         toast.success(response.data.message);
         setFirstName("");
         setLastName("");
@@ -81,7 +81,6 @@ const Register = () => {
       } catch (err) {
         toast.error(err.response.data);
         toast.error(err.response.data.message);
-
         setLoading(false);
       }
     }

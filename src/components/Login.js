@@ -20,7 +20,7 @@ const Login = () => {
       });
 
       window.localStorage.setItem("auth", JSON.stringify(data));
-      router.go(0);
+      router.go("/");
     } catch (err) {
       toast.error("Error logging in, try again later.");
       setLoading(false);

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import TableC from "../forms/ClassesTable";
 import GradesTable from "../forms/GradesTable";
 import { SyncOutlined } from "@ant-design/icons";
+
 const Students = (props) => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;

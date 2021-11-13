@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import StudentDashboard from "./chart/StudentDashboard";
 import IDDashboard from "./chart/IDDashboard";
+
 const Dashboard = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
 
   const { user, courses, coursesWM, maxMin } = state;
-  const { role, name } = user;
+  const { role, name, email } = user;
 
   return (
-    <div className="container">
+    <>
       {role === "Student" ? (
         <>
           {courses && courses.length > 0 ? (
@@ -66,7 +67,7 @@ const Dashboard = () => {
           <IDDashboard dean={true} maxPC={maxMin} />
         </>
       )}
-    </div>
+    </>
   );
 };
 

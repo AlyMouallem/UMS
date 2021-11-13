@@ -148,7 +148,7 @@ const IDDashboard = ({ maxPC, dean }) => {
           <h4>Filter by code</h4>
           <Filter items={codes} handleClick={handleClick} />
         </div>
-        <div className="col col-sm-6">
+        <div className="col col-sm-10">
           <div key={Math.random() * 1948} className="chart">
             <GetBars item={item} />
           </div>

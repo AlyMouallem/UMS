@@ -16,6 +16,9 @@ import {
 const Navbar = () => {
   const { Item, SubMenu } = Menu;
   const [state, setState] = useState([]);
+  // const { user } = state;
+  // const { name, email, role } = user;
+
   const router = useHistory();
 
   useEffect(() => {
@@ -29,12 +32,13 @@ const Navbar = () => {
     window.localStorage.removeItem("auth");
     setState([]);
     router.push("/");
+    router.go(0);
   };
   return (
     <>
       {state && state.user && state.user.name && state !== null ? (
         <>
-          <Menu mode="horizontal">
+          <Menu className="menu-nav" mode="horizontal">
             <Item key={110} icon={<UserOutlined />}>
               <NavLink to="/dashboard">
                 {state && state.user && state.user.name}

@@ -3,9 +3,10 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import TableC from "../forms/ClassesTable";
 import Filter from "../forms/Filter";
-import Pagination from "../forms/Pagination";
-import { paginate } from "../../utils/paginate";
+// import Pagination from "../forms/Pagination";
+// import { paginate } from "../../utils/paginate";
 import _ from "lodash";
+
 const IClasses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const [courses, setCourses] = useState([]);
@@ -60,6 +61,7 @@ const IClasses = () => {
 
               <div className="row">
                 <div className="col-md-2 col-sm-2 ">
+                  <h4>Filter by code</h4>
                   <Filter items={codes} handleClick={handleClick} />
                 </div>
                 <div className="col-md-8 col-sm-8">

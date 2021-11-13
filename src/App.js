@@ -8,6 +8,7 @@ import "antd/dist/antd.css";
 import Navbar from "./Navbar";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
+import Footer from "./Footer";
 function App() {
   axios.defaults.baseURL = "http://localhost:8000";
   // axios.defaults.baseURL = "https://myuniversitymu.herokuapp.com/";
@@ -16,6 +17,7 @@ function App() {
       <Navbar />
       <ToastContainer />
       <MainRouter />
+      <Footer />
     </Router>
   );
 }

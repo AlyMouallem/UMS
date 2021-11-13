@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Redirect } from "react-router";
+
 const Home = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
+
   return (
     <>
       {state && state.token && <Redirect to="/dashboard" />}

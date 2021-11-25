@@ -4,20 +4,13 @@ import { useHistory } from "react-router";
 import { Menu } from "antd";
 import { IoIosPeople } from "react-icons/io";
 import { BsBook } from "react-icons/bs";
-import { AiOutlineHome } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
-import {
-  UserAddOutlined,
-  LoginOutlined,
-  UserOutlined,
-  LogoutOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, LogoutOutlined, PlusOutlined } from "@ant-design/icons";
+
+import Nav from "./components/Nav";
 const Navbar = () => {
   const { Item, SubMenu } = Menu;
   const [state, setState] = useState([]);
-  // const { user } = state;
-  // const { name, email, role } = user;
 
   const router = useHistory();
 
@@ -32,7 +25,6 @@ const Navbar = () => {
     window.localStorage.removeItem("auth");
     setState([]);
     router.push("/");
-    router.go(0);
   };
   return (
     <>
@@ -121,17 +113,7 @@ const Navbar = () => {
           </Menu>
         </>
       ) : (
-        <Menu mode="horizontal">
-          <Item key={1} icon={<AiOutlineHome />}>
-            <NavLink to="/">Home</NavLink>
-          </Item>
-          <Item key={2} icon={<LoginOutlined />}>
-            <NavLink to="/login">Login</NavLink>
-          </Item>
-          <Item key={3} icon={<UserAddOutlined />}>
-            <NavLink to="/register">Register</NavLink>
-          </Item>
-        </Menu>
+        <Nav />
       )}
     </>
   );

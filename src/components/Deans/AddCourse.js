@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
-
+import DeanRoute from "../../routes/Dean";
 const AddCourses = () => {
   const [majors, setMajors] = useState([]);
   const [instructors, setInstructors] = useState([]);
@@ -93,7 +93,7 @@ const AddCourses = () => {
   };
 
   return (
-    <>
+    <DeanRoute>
       {state &&
       majors &&
       majors.length > 0 &&
@@ -303,7 +303,7 @@ const AddCourses = () => {
       ) : (
         <h1>Loading</h1>
       )}
-    </>
+    </DeanRoute>
   );
 };
 

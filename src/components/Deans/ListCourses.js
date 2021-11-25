@@ -5,6 +5,7 @@ import TableC from "../forms/ClassesTable";
 import { useHistory } from "react-router";
 import { Modal } from "antd";
 import Filter from "../forms/Filter";
+import DeanRoute from "./../../routes/Dean";
 
 const ListCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -60,11 +61,12 @@ const ListCourses = () => {
     }
   };
   return (
-    <>
+    <DeanRoute>
       {courses && courses.length > 0 && (
         <>
           <div className="container">
             <div className="row">
+              <h1>{heading}</h1>
               <div className="col-md-2 col-sm-2" style={{ paddingTop: "5%" }}>
                 <h4>Filter by Major</h4>
                 <Filter items={majors} handleClick={handleClick} />
@@ -72,7 +74,6 @@ const ListCourses = () => {
                 <Filter items={instructors} handleClick={handleClick} />
               </div>
               <div className="col-md-8 col-sm-8">
-                <h1>{heading}</h1>
                 <TableC
                   courses={filter}
                   showStudents={showStudents}
@@ -95,7 +96,7 @@ const ListCourses = () => {
           </div>
         </>
       )}
-    </>
+    </DeanRoute>
   );
 };
 

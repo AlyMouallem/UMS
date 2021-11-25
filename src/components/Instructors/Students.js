@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import TableC from "../forms/ClassesTable";
 import GradesTable from "../forms/GradesTable";
 import { SyncOutlined } from "@ant-design/icons";
-
+import InstructorRoute from "../../routes/Instructor";
 const Students = (props) => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
@@ -86,7 +86,7 @@ const Students = (props) => {
   };
 
   return (
-    <>
+    <InstructorRoute>
       {state && state.user && state.user.name && (
         <>
           {courses && courses.length > 0 ? (
@@ -99,7 +99,8 @@ const Students = (props) => {
 
               <div className="container">
                 <div className="row ">
-                  <div className="py-3">
+                  <div className="col-md-2 col-sm-2"></div>
+                  <div className="col-md-8 col-sm-8">
                     <TableC courses={courses} showGradesInst={showGrades} />
                   </div>
                 </div>
@@ -157,7 +158,7 @@ const Students = (props) => {
           )}
         </>
       )}
-    </>
+    </InstructorRoute>
   );
 };
 

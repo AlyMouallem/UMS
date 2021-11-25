@@ -3,6 +3,7 @@ import axios from "axios";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
 import { Modal } from "antd";
+import DeanRoute from "../../routes/Dean";
 const ListMajors = () => {
   const [majors, setMajors] = useState([]);
   const [ok, setOk] = useState(false);
@@ -36,7 +37,7 @@ const ListMajors = () => {
   };
 
   return (
-    <>
+    <DeanRoute>
       {majors && majors.length > 0 && (
         <>
           <div className="container">
@@ -87,7 +88,7 @@ const ListMajors = () => {
           </div>
         </>
       )}
-    </>
+    </DeanRoute>
   );
 };
 

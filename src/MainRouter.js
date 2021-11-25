@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -17,13 +17,13 @@ import Students from "./components/Instructors/Students";
 import IClasses from "./components/Instructors/IClasses";
 import Profile from "./components/Profile";
 import IDDashboard from "./components/chart/IDDashboard";
-// import InstructorDashboard from "./components/Instructors/InstructorDashboard";
-// import DeanDashboard from "./components/Deans/DeanDashboard";
+import Home2 from "./components/Home2";
+
 const MainRouter = () => {
   return (
     <>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Home2} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/dashboard" component={Dashboard} />
@@ -38,10 +38,7 @@ const MainRouter = () => {
         <Route exact path="/instructor-classes" component={IClasses} />
         <Route exact path="/register-courses" component={RegisterCourses} />
         <Route exact path="/profile" component={Profile} />
-        {/* <Route exact path="/idashboard" component={InstructorDashboard} /> */}
-        {/* <Route exact path="/ddashboard" component={DeanDashboard} /> */}
         <Route exact path="/iddashboard" component={IDDashboard} />
-
         <Route path="*" exact component={PageNotFound} />
       </Switch>
     </>

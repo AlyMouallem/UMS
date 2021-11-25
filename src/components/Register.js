@@ -91,36 +91,26 @@ const Register = () => {
       {state && state.token && <Redirect to="/dashboard" />}
       {majors.length > 0 ? (
         <>
-          <h1 className="jumbotron text-center bg-primary square">Register</h1>
-          <div className="container-fluid">
-            <div className="container">
-              <AuthForm
-                handleSubmit={handleSubmit}
-                first_name={first_name}
-                setFirstName={setFirstName}
-                last_name={last_name}
-                setLastName={setLastName}
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-                loading={loading}
-                register="Register"
-                majors={majors}
-                major={major}
-                setMajor={setMajor}
-                instructor={instructor}
-                setInstructor={setInstructor}
-              />
-            </div>
-            <div className="row">
-              <div className="col">
-                <p className="text-center">
-                  Already registerd?
-                  <Link to="/login">Login</Link>
-                </p>
-              </div>
-            </div>
+          <div className="container">
+            <div className="display-4 text-center mt-2">Register</div>
+            <AuthForm
+              handleSubmit={handleSubmit}
+              first_name={first_name}
+              setFirstName={setFirstName}
+              last_name={last_name}
+              setLastName={setLastName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              loading={loading}
+              register="Register"
+              majors={majors}
+              major={major}
+              setMajor={setMajor}
+              instructor={instructor}
+              setInstructor={setInstructor}
+            />
           </div>
         </>
       ) : (

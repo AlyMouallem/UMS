@@ -4,6 +4,8 @@ import axios from "axios";
 import { Modal } from "antd";
 import TableC from "../forms/ClassesTable";
 import GradesTable from "../forms/GradesTable";
+import UserRoute from "../../routes/UserRoute";
+
 const Classes = (props) => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
@@ -40,7 +42,7 @@ const Classes = (props) => {
   };
 
   return (
-    <>
+    <UserRoute>
       {courses && courses.length > 0 ? (
         <>
           <div className="container">
@@ -83,7 +85,7 @@ const Classes = (props) => {
           </div>
         </>
       )}
-    </>
+    </UserRoute>
   );
 };
 

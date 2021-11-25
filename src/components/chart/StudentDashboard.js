@@ -65,7 +65,7 @@ const StudentDashboard = ({ courses }) => {
 
   return (
     <>
-      <div className="chart ">
+      <div key={Math.random() * 999} className="chart">
         <div>
           <Bar height={300} data={data} options={options} />
           <h2>Total per course</h2>

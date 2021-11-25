@@ -3,6 +3,7 @@ import axios from "axios";
 import { Modal } from "antd";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import Faculty from "../forms/Faculty";
+import DeanRoute from "../../routes/Dean";
 
 const ListInstructors = () => {
   const [instructors, setInstructors] = useState([]);
@@ -25,14 +26,14 @@ const ListInstructors = () => {
     setCourses(data);
   };
   return (
-    <>
+    <DeanRoute>
       {instructors && instructors.length > 0 && (
         <>
           <div className="container">
+            <h1>Below are all the instructors</h1>
             <div className="row">
-              <div className="col-3"></div>
-              <div>
-                <h1>Below are all the instructors</h1>
+              <div className="col-md-2 col-sm-2"></div>
+              <div className="col-md-8 col-sm-8">
                 <Faculty people={instructors} showCourses={showCourses} />
               </div>
               <Modal
@@ -81,7 +82,7 @@ const ListInstructors = () => {
           </div>
         </>
       )}
-    </>
+    </DeanRoute>
   );
 };
 

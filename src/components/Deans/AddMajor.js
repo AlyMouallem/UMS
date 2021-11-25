@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import DeanRoute from "../../routes/Dean";
 const AddMajor = () => {
   const [name, setName] = useState("");
 
@@ -20,7 +20,7 @@ const AddMajor = () => {
     }
   };
   return (
-    <>
+    <DeanRoute>
       <div className="container py-2">
         <div className="row">
           <div className="col-2"></div>
@@ -46,7 +46,7 @@ const AddMajor = () => {
           </div>
         </div>
       </div>
-    </>
+    </DeanRoute>
   );
 };
 

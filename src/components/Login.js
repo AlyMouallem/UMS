@@ -31,26 +31,16 @@ const Login = () => {
     <>
       {state && state.token && <Redirect to="/dashboard" />}
 
-      <h1 className="jumbotron text-center bg-primary square">Login</h1>
-      <div className="container-fluid">
-        <div className="container">
-          <AuthForm
-            handleSubmit={handleSubmit}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            loading={loading}
-          />
-        </div>
-        <div className="row">
-          <div className="col">
-            <p className="text-center">
-              Don't have an account?
-              <Link to="/register">Register</Link>
-            </p>
-          </div>
-        </div>
+      <div className="container">
+        <div className="display-4 text-center mt-2">Login</div>
+        <AuthForm
+          handleSubmit={handleSubmit}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          loading={loading}
+        />
       </div>
     </>
   );

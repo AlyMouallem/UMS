@@ -11,7 +11,9 @@ const IDDashboard = ({ maxPC, dean }) => {
   const average = [];
   const instructor = [];
   const [item, setItem] = useState([]);
-
+  const [header, setHeader] = useState(
+    `Below is a representation of all classes.To get detailed info about a specific class, click on the class code above the chart.`
+  );
   var indexF = [];
 
   for (let i = 0; i < maxPC.length; i++) {
@@ -35,6 +37,15 @@ const IDDashboard = ({ maxPC, dean }) => {
     const codek = code.reduce((a, b) => a.concat(b), []);
     indexF = codek.indexOf(item);
     setItem(indexF);
+    if (item !== "All") {
+      setHeader(
+        `Below is a representation of ${item} class. For detailed info, click on the class code.`
+      );
+    } else {
+      setHeader(
+        `Below is a representation of all classes.To get detailed info about a specific class, click on the class code above the chart.`
+      );
+    }
   };
 
   const GetBars = ({ item }) => {
@@ -89,9 +100,10 @@ const IDDashboard = ({ maxPC, dean }) => {
               <>
                 {item === i && (
                   <>
-                    <Link to={`instructor-students/${code[i]}`}></Link>
                     <div>
-                      <h1> {code[i]}</h1>
+                      <Link to={`instructor-students/${code[i]}`}>
+                        <h1> {code[i]}</h1>
+                      </Link>
                       <Bar
                         key={i + 5 * Math.random() * 12}
                         width="300"
@@ -140,9 +152,7 @@ const IDDashboard = ({ maxPC, dean }) => {
 
   return (
     <>
-      <h4>
-        To see detailed info about a specific class, click on the class code.
-      </h4>
+      <h4>{header}</h4>
       <div className="row">
         <div className="col col-sm-2">
           <h4>Filter by code</h4>

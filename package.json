@@ -23,12 +23,14 @@
     "react-super-responsive-table": "^5.2.0",
     "react-switch": "^6.0.0",
     "react-toastify": "^8.0.3",
+    "sass": "^1.43.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "compile:sass": "sass --watch scss:assets/css",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

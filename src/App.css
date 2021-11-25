@@ -5,8 +5,16 @@
 body {
   overflow-x: hidden !important;
 }
+
+.navbar img {
+  width: 50%;
+  height: 50%;
+}
 .container {
   max-width: 100% !important;
+}
+.col-sm-2 > h4 {
+  color: rgba(0, 153, 255, 0.939);
 }
 
 h1 {
@@ -17,13 +25,6 @@ h3 {
   margin: 5px;
   padding: 5px;
 }
-.ant-menu {
-  background: linear-gradient(
-    to right,
-    #f1fff8a8,
-    rgb(235, 236, 247)
-  ) !important;
-}
 
 .square {
   border-radius: 0px;
@@ -31,6 +32,7 @@ h3 {
 .ant-menu-overflow {
   display: flex;
   flex-wrap: nowrap;
+  background: linear-gradient(to right, #eee, rgb(235, 236, 247)) !important;
 }
 
 .jumbotron {
@@ -61,7 +63,6 @@ h3 {
 }
 
 .dashboard {
-  /* max-width: 100% !important; */
   text-align: center;
 }
 
@@ -91,31 +92,19 @@ h3 {
   }
 }
 
-.footer {
+/* .footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  /* align-items: flex-start; */
-  /* justify-content: space-between; */
+  align-items: flex-start;
+  justify-content: space-between;
   background-color: #f1fff8a8;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   z-index: -4;
   padding: 2px 10px;
-  border-style: groove;
-  animation-name: disappear;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes disappear {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
+  width: 100%;
+} */
 
 h1,
 h2,

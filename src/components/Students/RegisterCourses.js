@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { AiOutlineMinus } from "react-icons/ai";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { useHistory } from "react-router";
-
+import UserRoute from "../../routes/UserRoute";
 const RegisterCourses = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
   const { user } = state;
@@ -86,7 +86,7 @@ const RegisterCourses = () => {
   };
 
   return (
-    <>
+    <UserRoute>
       {courses && courses.length !== 0 && credits < 18 ? (
         <>
           <h1>Courses available for {major} students</h1>
@@ -209,7 +209,7 @@ const RegisterCourses = () => {
       ) : (
         <h1>You can register {18 - credits} credits more</h1>
       )}
-    </>
+    </UserRoute>
   );
 };
 

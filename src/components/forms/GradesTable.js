@@ -34,7 +34,7 @@ const GradesTable = ({ grade, setGrade, total, edit }) => {
   };
 
   return (
-    <div>
+    <div key={Math.random() * 199}>
       <Table className="table">
         <Thead>
           <Tr>
@@ -51,7 +51,7 @@ const GradesTable = ({ grade, setGrade, total, edit }) => {
 
             return (
               <>
-                <Tr>
+                <Tr key={Math.random() * 899}>
                   <Td>{index + 1}</Td>
                   <Td>{title}</Td>
                   <Td>

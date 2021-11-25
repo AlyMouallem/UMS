@@ -12,9 +12,9 @@ const Footer = () => {
       state.user.name &&
       state.user.email ? (
         <div className="footer">
-          <h4>
-            <b>User information: </b>
-          </h4>
+          {/* <h4>
+              <b>User information: </b>
+            </h4> */}
           <h6>{`Name: ${state.user.name} `}</h6>
           <h6>{`Email: ${state.user.email} `}</h6>
           <h6>{`Role: ${state.user.role} `}</h6>

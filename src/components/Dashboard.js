@@ -7,10 +7,10 @@ const Dashboard = () => {
   const [state] = useState(JSON.parse(window.localStorage.getItem("auth")));
 
   const { user, courses, coursesWM, maxMin } = state;
-  const { role, name, email } = user;
+  const { role, name } = user;
 
   return (
-    <>
+    <div className="container">
       {role === "Student" ? (
         <>
           {courses && courses.length > 0 ? (
@@ -49,8 +49,6 @@ const Dashboard = () => {
             <>
               {maxMin && maxMin.length > 0 ? (
                 <>
-                  <h4>Below is a representation of your classes' averages.</h4>
-
                   <IDDashboard maxPC={maxMin} />
                 </>
               ) : (
@@ -62,12 +60,10 @@ const Dashboard = () => {
       )}
       {role === "Dean" && (
         <>
-          <h4>Below is a representation of all classes' marks.</h4>
-
           <IDDashboard dean={true} maxPC={maxMin} />
         </>
       )}
-    </>
+    </div>
   );
 };
 

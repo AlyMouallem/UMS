@@ -32,7 +32,7 @@ const AuthForm = ({
                   First Name
                 </label>
                 <input
-                  placeholder="Enter your first name"
+                  placeholder="First Name"
                   type="text"
                   value={first_name}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -46,7 +46,7 @@ const AuthForm = ({
                   Last Name
                 </label>
                 <input
-                  placeholder="Enter your last name"
+                  placeholder="Last Name"
                   type="text"
                   value={last_name}
                   onChange={(e) => setLastName(e.target.value)}
@@ -62,7 +62,7 @@ const AuthForm = ({
               Email address
             </label>
             <input
-              placeholder="Enter email"
+              placeholder="Email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -77,7 +77,7 @@ const AuthForm = ({
               Password
             </label>
             <input
-              placeholder="Enter password"
+              placeholder="Password"
               type="password"
               className="form-control"
               id="exampleInputPassword1"

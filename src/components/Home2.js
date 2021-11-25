@@ -215,7 +215,7 @@ const Home2 = () => {
                 </svg>
               </div>
               <div className="contact-box__info">
-                <a href="/" className="contact-box__info--title">
+                <a href="#" className="contact-box__info--title">
                   +961 71234567
                 </a>
                 <p className="contact-box__info--subtitle"> Mon-Fri 9am-6pm</p>

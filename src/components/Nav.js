@@ -121,6 +121,7 @@ const Nav = () => {
               onCancel={() => {
                 setRegisterOk(false);
               }}
+              className="Modal"
               footer={null}
             >
               {<Register />}
@@ -130,6 +131,7 @@ const Nav = () => {
               onCancel={() => {
                 setLoginOk(false);
               }}
+              className="Modal"
               footer={null}
             >
               {<Login />}
